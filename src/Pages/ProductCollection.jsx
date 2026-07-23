@@ -7,7 +7,6 @@ import FilterChip from '../Components/FilterChip/FilterChip';
 import Pagination from '../Components/Pagination/Pagination';
 import Button from '../Components/Button/Button';
 import { products } from '../Data/products';
-import styles from './ProductCollection.module.css';
 
 const PRODUCTS_PER_PAGE = 16;
 const FILTERS = ['All', 'Luxury', 'Streetwear', 'Sports', 'University', 'Best Sellers', 'New Arrivals', 'Limited Edition'];
@@ -105,20 +104,20 @@ const ProductCollection = () => {
   return (
     <>
       {/* Hero */}
-      <section className={styles.hero}>
-        <div className={styles.heroInner}>
-          <div className={styles.heroGrid}>
-            <div className={styles.heroText}>
-              <nav className={styles.breadcrumb}>
-                <Link to="/">Home</Link>
-                <span className={styles.breadcrumbSep}><FiChevronRight size={14} /></span>
-                <Link to="/collections">Shop</Link>
-                <span className={styles.breadcrumbSep}><FiChevronRight size={14} /></span>
-                <span>{categoryTitle}</span>
+      <section className="py-12 lg:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 xl:px-8">
+          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-gutter-mobile lg:gap-gutter items-center">
+            <div className="py-4 md:py-12">
+              <nav className="flex items-center gap-1.5 lg:gap-2 mb-4 lg:mb-6 overflow-x-auto whitespace-nowrap scrollbar-hide">
+                <Link to="/" className="text-[10px] lg:text-label font-label tracking-widest uppercase text-text-muted hover:text-brand-green transition-colors">Home</Link>
+                <span className="text-text-muted text-label"><FiChevronRight size={14} /></span>
+                <Link to="/collections" className="text-[10px] lg:text-label font-label tracking-widest uppercase text-text-muted hover:text-brand-green transition-colors">Shop</Link>
+                <span className="text-text-muted text-label"><FiChevronRight size={14} /></span>
+                <span className="text-[10px] lg:text-label font-label tracking-widest uppercase text-text-muted">{categoryTitle}</span>
               </nav>
 
               <motion.h1
-                className={styles.heroTitle}
+                className="font-display text-display-md lg:text-display-lg font-bold tracking-tighter leading-tight mb-4 lg:mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
@@ -127,7 +126,7 @@ const ProductCollection = () => {
               </motion.h1>
 
               <motion.p
-                className={styles.heroDesc}
+                className="text-body-sm lg:text-body-lg text-text-secondary/80 mb-6 lg:mb-8 max-w-[540px] leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
@@ -143,7 +142,7 @@ const ProductCollection = () => {
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
                 <Button variant="primary" size="md">
-                  <Link to="/collections" style={{ color: 'inherit', textDecoration: 'none' }}>
+                  <Link to="/collections" className="text-inherit no-underline">
                     Explore Collections
                   </Link>
                 </Button>
@@ -151,7 +150,7 @@ const ProductCollection = () => {
             </div>
 
             <motion.div
-              className={styles.heroImage}
+              className="relative aspect-[4/5] overflow-hidden"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
@@ -160,17 +159,18 @@ const ProductCollection = () => {
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuC94ncVhdI1CZHlXbsmOv_1UyWgygaS7SBprdvHq9FeCk7Y7xdti8NKoHGPNPz_PWBpKWBE7uKiLBGxkbv8xOXwUK0bQJf3KdJSljwQjEWWBA-azOyba1HsvGMtOmgf0z1fD5kpcooh2ywg39R0lDDQze12UkLPUshco2uB4sg7w1hTLZJT27Hk5HpSyAIS0LOjCw07r7V6D7z0w7cvmsqSMLgR9q1CJvOxE3qScxl6XDdLDdFwIblrUw"
                 alt="Premium cap collection"
                 effect="opacity"
+                className="w-full h-full object-cover"
               />
-              <div className={styles.heroImageOverlay} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Products */}
-      <section className={styles.products}>
+      <section className="max-w-7xl mx-auto px-4 md:px-6 xl:px-8 pb-20 md:pb-[120px]">
         {/* Sticky Filter Bar */}
-        <div className={styles.filterBar}>
+        <div className="sticky top-[var(--navbar-height)] z-40 bg-white/95 backdrop-blur-md py-4 lg:py-6 mb-6 lg:mb-12 border-b border-border-light flex items-center overflow-x-auto gap-3 lg:gap-4 scrollbar-hide">
           {FILTERS.map((filter) => (
             <FilterChip
               key={filter}
@@ -182,9 +182,9 @@ const ProductCollection = () => {
         </div>
 
         {/* Controls: Search + Sort */}
-        <div className={styles.controls}>
-          <div className={styles.searchWrapper}>
-            <FiSearch className={styles.searchIcon} />
+        <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-3 lg:gap-4 mb-6 lg:mb-10">
+          <div className="relative w-full lg:w-80">
+            <FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 text-lg" />
             <input
               type="text"
               placeholder="Search collection..."
@@ -193,13 +193,14 @@ const ProductCollection = () => {
                 setSearchQuery(e.target.value);
                 setCurrentPage(1);
               }}
+              className="w-full bg-surface-tertiary border border-border-light pl-11 pr-4 py-3.5 lg:py-3 text-body-md text-text-primary outline-none focus:border-brand-green"
             />
           </div>
 
-          <div className={styles.sortWrapper}>
-            <span className={styles.sortLabel}>Sort by:</span>
+          <div className="flex items-center justify-end gap-2">
+            <span className="text-label font-label tracking-widest uppercase text-text-muted whitespace-nowrap">Sort by:</span>
             <select
-              className={styles.sortSelect}
+              className="bg-transparent border-none text-label font-label tracking-widest uppercase text-brand-green cursor-pointer outline-none min-h-[44px]"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
             >
@@ -215,7 +216,7 @@ const ProductCollection = () => {
 
         {/* Product Grid */}
         <motion.div
-          className={styles.productGrid}
+          className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter-mobile lg:gap-gutter"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
@@ -224,20 +225,20 @@ const ProductCollection = () => {
             paginatedProducts.map((product) => (
               <motion.div
                 key={product.id}
-                className={styles.productGridItem}
+                className="mb-4 md:mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
               >
-                <div style={{ padding: '40px', background: 'var(--bg-tertiary)', textAlign: 'center', color: 'var(--text-muted)', fontSize: 'var(--fs-label)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                <div className="p-10 bg-gray-50 text-center text-gray-500 text-xs tracking-[0.1em] uppercase">
                   {product.name}
                 </div>
               </motion.div>
             ))
           ) : (
-            <div className={styles.noResults}>
-              <p>No products found.</p>
-              <p style={{ fontSize: 'var(--fs-body-sm)', marginBottom: 24, opacity: 0.7 }}>
+            <div className="col-span-full text-center py-12 lg:py-20 text-text-muted">
+              <p className="text-base md:text-lg mb-4 md:mb-6">No products found.</p>
+              <p className="text-sm mb-6 opacity-70">
                 Products will appear here once added to the data source.
               </p>
               <Button

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { FiHeart } from 'react-icons/fi';
-import styles from './WishlistButton.module.css';
 
 const WishlistButton = ({ productId, onToggle }) => {
   const [active, setActive] = useState(false);
@@ -12,7 +11,7 @@ const WishlistButton = ({ productId, onToggle }) => {
 
   return (
     <button
-      className={`${styles.btn} ${active ? styles.active : ''}`}
+      className={`inline-flex items-center justify-center gap-2 px-8 py-4 w-full border border-border-dark text-text-primary text-label font-label tracking-widest uppercase transition-all hover:bg-surface-tertiary${active ? ' border-brand-green text-brand-green' : ''}`}
       onClick={handleClick}
     >
       <FiHeart size={16} />

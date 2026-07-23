@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FiCamera, FiX, FiCheck, FiStar } from 'react-icons/fi';
 import Button from '../Button/Button';
 import SectionTitle from '../SectionTitle/SectionTitle';
-import styles from './CustomerReview.module.css';
 
 const AVATAR_COLORS = ['#2E8B57', '#111111', '#555f6f', '#97344a', '#b64c62', '#15803d'];
 
@@ -57,12 +56,21 @@ const CustomerReview = ({ reviews = [], onReviewSubmit }) => {
   const visibleReviews = reviews.slice(0, visibleCount);
 
   return (
-    <section className={styles.section}>
-      <div className={styles.inner}>
+    <section className="py-section-mobile lg:py-section bg-surface-primary overflow-hidden relative">
+      <div className="max-w-container mx-auto px-margin-mobile lg:px-margin-desktop">
         {/* Decorative background elements */}
-        <div className={styles.decorCircle} style={{ width: 300, height: 300, top: -80, right: -80 }} />
-        <div className={styles.decorCircle} style={{ width: 180, height: 180, bottom: 60, left: -40 }} />
-        <div className={styles.decorDots} style={{ top: 120, right: 60 }}>
+        <div
+          className="absolute rounded-full pointer-events-none opacity-[0.04] bg-brand-green hidden lg:block"
+          style={{ width: 300, height: 300, top: -80, right: -80 }}
+        />
+        <div
+          className="absolute rounded-full pointer-events-none opacity-[0.04] bg-brand-green hidden lg:block"
+          style={{ width: 180, height: 180, bottom: 60, left: -40 }}
+        />
+        <div
+          className="absolute pointer-events-none opacity-[0.06] text-xs text-brand-green font-bold hidden lg:block"
+          style={{ top: 120, right: 60, letterSpacing: 12, lineHeight: '12px' }}
+        >
           {'• • • • •\n• • • • •\n• • • • •'}
         </div>
 
@@ -74,14 +82,19 @@ const CustomerReview = ({ reviews = [], onReviewSubmit }) => {
 
         {/* ===== Submit Review Button / Form ===== */}
         <motion.div
-          className={styles.formCard}
+          className="bg-surface-secondary p-7 lg:p-12 border border-border-light mb-12 lg:mb-16 relative overflow-hidden"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h3>Share Your Experience</h3>
-          <p>Tell us what you think about your CAPIST cap. Upload photos, leave a review.</p>
+          {/* Green accent bar */}
+          <div className="absolute top-0 left-0 w-1 h-full bg-brand-green" />
+
+          <h3 className="font-display text-headline-sm mb-1">Share Your Experience</h3>
+          <p className="text-text-muted text-body-sm mb-6 lg:mb-8">
+            Tell us what you think about your CAPIST cap. Upload photos, leave a review.
+          </p>
 
           {!formOpen ? (
             <motion.div whileHover={{ scale: 1.01 }}>
@@ -92,35 +105,41 @@ const CustomerReview = ({ reviews = [], onReviewSubmit }) => {
             </motion.div>
           ) : (
             <motion.form
-              className={styles.form}
+              className="flex flex-col gap-4 lg:gap-5"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               transition={{ duration: 0.4 }}
               onSubmit={handleSubmit}
             >
-              <div className={styles.formRow}>
-                <div className={styles.field}>
-                  <label>Your Name</label>
+              <div className="flex flex-col lg:grid lg:grid-cols-2 gap-4 lg:gap-5">
+                <div className="flex flex-col">
+                  <label className="text-label font-label tracking-widest uppercase text-text-muted mb-1.5">
+                    Your Name
+                  </label>
                   <input
                     type="text"
                     placeholder="e.g. Alex M."
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
+                    className="border border-border-light p-3.5 lg:p-4 bg-white text-body-md text-text-primary outline-none transition-colors focus:border-brand-green focus:ring-1 focus:ring-brand-green font-body"
                   />
                 </div>
-                <div className={styles.field}>
-                  <label>Rating</label>
-                  <div className={styles.starRating}>
+                <div className="flex flex-col">
+                  <label className="text-label font-label tracking-widest uppercase text-text-muted mb-1.5">
+                    Rating
+                  </label>
+                  <div className="flex gap-2 mt-1">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <button
                         key={star}
                         type="button"
-                        className={`${styles.starBtn} ${star <= (hoverRating || rating) ? styles.filled : ''}`}
                         onClick={() => setRating(star)}
                         onMouseEnter={() => setHoverRating(star)}
                         onMouseLeave={() => setHoverRating(0)}
                         aria-label={`${star} star${star > 1 ? 's' : ''}`}
+                        className="text-[32px] text-border-medium bg-none border-none cursor-pointer transition-all leading-none p-1 min-h-[44px] min-w-[44px]"
+                        data-filled={star <= (hoverRating || rating) ? '' : undefined}
                       >
                         ★
                       </button>
@@ -129,25 +148,35 @@ const CustomerReview = ({ reviews = [], onReviewSubmit }) => {
                 </div>
               </div>
 
-              <div className={styles.field}>
-                <label>Your Review</label>
+              <div className="flex flex-col">
+                <label className="text-label font-label tracking-widest uppercase text-text-muted mb-1.5">
+                  Your Review
+                </label>
                 <textarea
                   placeholder="What did you love about your cap? Share details about fit, fabric, and style..."
                   value={text}
                   onChange={(e) => setText(e.target.value)}
                   required
+                  rows={4}
+                  className="border border-border-light p-3.5 lg:p-4 bg-white text-body-md text-text-primary outline-none transition-colors focus:border-brand-green focus:ring-1 focus:ring-brand-green font-body resize-y min-h-[100px]"
                 />
               </div>
 
-              <div className={styles.field}>
-                <label>Add Photos (optional)</label>
+              <div className="flex flex-col">
+                <label className="text-label font-label tracking-widest uppercase text-text-muted mb-1.5">
+                  Add Photos (optional)
+                </label>
                 <div
-                  className={styles.imageUpload}
+                  className="border-2 border-dashed border-border-light p-6 lg:p-8 text-center cursor-pointer transition-colors active:border-brand-green active:bg-brand-green/5"
                   onClick={() => fileInputRef.current?.click()}
                 >
-                  <FiCamera className={styles.imageUploadIcon} />
-                  <p>Paste an image URL below or click to browse</p>
-                  <span>Add Photos</span>
+                  <FiCamera className="text-[28px] lg:text-[32px] text-text-muted mb-2" />
+                  <p className="text-body-sm text-text-muted">
+                    Paste an image URL below or click to browse
+                  </p>
+                  <span className="text-label text-brand-green font-label tracking-widest uppercase block mt-1">
+                    Add Photos
+                  </span>
                 </div>
                 <input
                   ref={fileInputRef}
@@ -173,14 +202,7 @@ const CustomerReview = ({ reviews = [], onReviewSubmit }) => {
                     value={imageInput}
                     onChange={(e) => setImageInput(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddImage())}
-                    style={{
-                      flex: 1,
-                      border: '1px solid var(--border-light)',
-                      padding: '10px 12px',
-                      fontSize: 'var(--fs-body-sm)',
-                      outline: 'none',
-                      fontFamily: 'var(--font-body)',
-                    }}
+                    className="flex-1 border border-border-light p-[10px_12px] text-body-sm outline-none font-body"
                   />
                   <Button variant="ghost" size="sm" type="button" onClick={handleAddImage}>
                     Add
@@ -188,11 +210,22 @@ const CustomerReview = ({ reviews = [], onReviewSubmit }) => {
                 </div>
 
                 {imageUrls.length > 0 && (
-                  <div className={styles.imagePreview}>
+                  <div className="flex flex-wrap gap-2.5 mt-3">
                     {imageUrls.map((url, idx) => (
-                      <div key={idx} className={styles.imagePreviewItem}>
-                        <img src={url} alt={`Review image ${idx + 1}`} />
-                        <button type="button" onClick={() => handleRemoveImage(idx)}>
+                      <div
+                        key={idx}
+                        className="relative w-[72px] h-[72px] border border-border-light overflow-hidden"
+                      >
+                        <img
+                          src={url}
+                          alt={`Review attachment ${idx + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveImage(idx)}
+                          className="absolute top-0.5 right-0.5 w-[22px] h-[22px] bg-black/60 border-0 text-white text-[11px] flex items-center justify-center cursor-pointer rounded-full"
+                        >
                           <FiX />
                         </button>
                       </div>
@@ -201,11 +234,11 @@ const CustomerReview = ({ reviews = [], onReviewSubmit }) => {
                 )}
               </div>
 
-              <div className={styles.submitRow}>
+              <div className="flex flex-col-reverse lg:flex-row lg:justify-end lg:items-center gap-3 lg:gap-4 pt-2">
                 <AnimatePresence>
                   {submitted && (
                     <motion.span
-                      className={styles.successMsg}
+                      className="flex items-center gap-2 text-brand-green text-body-sm font-medium justify-center lg:justify-start"
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0 }}
@@ -230,20 +263,20 @@ const CustomerReview = ({ reviews = [], onReviewSubmit }) => {
         {/* ===== Reviews Display ===== */}
         {visibleReviews.length > 0 && (
           <>
-            <div className={styles.reviewsGrid}>
+            <div className="flex flex-col lg:grid lg:grid-cols-2 gap-gutter-mobile lg:gap-gutter mb-8 lg:mb-12">
               {visibleReviews.map((review, idx) => (
                 <motion.div
                   key={review.id}
-                  className={styles.reviewCard}
+                  className="bg-white border border-border-light p-6 lg:p-7 transition-all active:translate-y-[-2px] active:shadow-md lg:hover:translate-y-[-4px] lg:hover:shadow-lg"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.08 }}
                   whileHover={{ y: -4 }}
                 >
-                  <div className={styles.reviewHeader}>
+                  <div className="flex items-center gap-3 mb-3">
                     <div
-                      className={styles.reviewAvatar}
+                      className="w-10 h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center font-bold text-[15px] lg:text-base text-white flex-shrink-0"
                       style={{
                         background: AVATAR_COLORS[idx % AVATAR_COLORS.length],
                       }}
@@ -251,12 +284,12 @@ const CustomerReview = ({ reviews = [], onReviewSubmit }) => {
                       {review.name.charAt(0).toUpperCase()}
                     </div>
                     <div>
-                      <p className={styles.reviewName}>{review.name}</p>
-                      <p className={styles.reviewDate}>{review.date}</p>
+                      <p className="text-body-sm font-semibold">{review.name}</p>
+                      <p className="text-label text-text-muted">{review.date}</p>
                     </div>
                   </div>
 
-                  <div className={styles.reviewStars}>
+                  <div className="flex gap-0.5 mb-2">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <FiStar
                         key={i}
@@ -267,17 +300,24 @@ const CustomerReview = ({ reviews = [], onReviewSubmit }) => {
                     ))}
                   </div>
 
-                  <p className={styles.reviewText}>{review.text}</p>
+                  <p className="text-body-sm text-text-secondary leading-relaxed">
+                    {review.text}
+                  </p>
 
                   {review.images && review.images.length > 0 && (
                     <motion.div
-                      className={styles.reviewImages}
+                      className="flex gap-2 mt-3 flex-wrap"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.4 }}
                     >
                       {review.images.map((img, i) => (
-                        <img key={i} src={img} alt={`Review photo ${i + 1}`} />
+                        <img
+                          key={i}
+                          src={img}
+                          alt={`Review by ${review.name}`}
+                          className="w-16 h-16 lg:w-[72px] lg:h-[72px] object-cover border border-border-light"
+                        />
                       ))}
                     </motion.div>
                   )}
@@ -287,7 +327,7 @@ const CustomerReview = ({ reviews = [], onReviewSubmit }) => {
 
             {visibleCount < reviews.length && (
               <motion.div
-                className={styles.loadMore}
+                className="text-center"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}

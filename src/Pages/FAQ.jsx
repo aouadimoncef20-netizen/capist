@@ -34,8 +34,8 @@ const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(null);
 
   return (
-    <div style={{ padding: '120px 0' }}>
-      <div className="container-wide" style={{ maxWidth: '800px' }}>
+    <div className="py-24 lg:py-[120px]">
+      <div className="container-wide max-w-[800px]">
         <SectionTitle
           eyebrow="Support"
           title="Frequently Asked Questions"
@@ -46,38 +46,22 @@ const FAQ = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          style={{ display: 'flex', flexDirection: 'column', gap: '0' }}
+          className="flex flex-col"
         >
           {FAQs.map((faq, index) => (
             <div
               key={index}
-              style={{
-                borderBottom: '1px solid var(--border-light)',
-              }}
+              className="border-b border-border-light"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                style={{
-                  width: '100%',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  padding: '24px 0',
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  textAlign: 'left',
-                  fontSize: 'var(--fs-body-md)',
-                  fontWeight: 600,
-                  color: 'var(--text-primary)',
-                  fontFamily: 'var(--font-body)',
-                }}
+                className="w-full flex justify-between items-center py-6 text-body-md font-semibold text-text-primary cursor-pointer text-left"
               >
                 {faq.q}
                 <motion.span
                   animate={{ rotate: openIndex === index ? 180 : 0 }}
                   transition={{ duration: 0.2 }}
-                  style={{ color: 'var(--text-muted)', flexShrink: 0 }}
+                  className="text-text-muted shrink-0"
                 >
                   <FiChevronDown size={18} />
                 </motion.span>
@@ -89,14 +73,9 @@ const FAQ = () => {
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    style={{ overflow: 'hidden' }}
+                    className="overflow-hidden"
                   >
-                    <p style={{
-                      paddingBottom: '24px',
-                      color: 'var(--text-secondary)',
-                      fontSize: 'var(--fs-body-sm)',
-                      lineHeight: 1.7,
-                    }}>
+                    <p className="pb-6 text-text-secondary text-body-sm leading-[1.7]">
                       {faq.a}
                     </p>
                   </motion.div>

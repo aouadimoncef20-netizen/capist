@@ -2,86 +2,98 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FiLock } from 'react-icons/fi';
 import Button from '../Components/Button/Button';
-import styles from './Checkout.module.css';
+
+// Shared class for form inputs
+const inputClass = 'border-0 border-b border-border-light py-3 bg-transparent outline-none text-body-md text-text-primary focus:border-brand-green';
 
 const Checkout = () => {
   return (
-    <div className={styles.page}>
-      <div className={styles.container}>
-        <motion.div
-          className={styles.header}
+    <div className="pb-20 lg:pb-[120px]">
+      <div className="max-w-[720px] mx-auto px-margin-mobile lg:px-margin-desktop">
+
+        {/* Header */}
+        <motion.div className="mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1>Checkout</h1>
+          <h1 className="font-display text-headline-lg font-semibold mb-2">Checkout</h1>
         </motion.div>
 
-        {/* Steps */}
-        <div className={styles.steps}>
-          <div className={`${styles.step} ${styles.active}`}>
-            <span className={styles.stepNumber}>1</span> Shipping
-          </div>
-          <div className={styles.step}>
-            <span className={styles.stepNumber}>2</span> Billing
-          </div>
-          <div className={styles.step}>
-            <span className={styles.stepNumber}>3</span> Payment
-          </div>
+        {/* Progress Steps */}
+        <div className="flex items-center gap-8 mb-12 border-b border-border-light pb-4 overflow-x-auto">
+          {['Shipping', 'Billing', 'Payment'].map((label, i) => {
+            const active = i === 0;
+            return (
+              <div key={label}
+                className={`flex items-center gap-2 text-label font-label uppercase pb-4 whitespace-nowrap ${
+                  active ? 'text-brand-green border-b-2 border-brand-green' : 'text-text-muted border-b-2 border-transparent'
+                }`}
+              >
+                <span className={`w-5 h-5 rounded-full border border-current flex items-center justify-center text-[10px] ${
+                  active ? 'bg-brand-green text-white border-brand-green' : ''
+                }`}>
+                  {i + 1}
+                </span>
+                {label}
+              </div>
+            );
+          })}
         </div>
 
         {/* Order Summary */}
-        <div className={styles.orderSummary}>
-          <h3>Order Summary</h3>
-          <div className={styles.orderItem}>
-            <div className={styles.orderItemImage} style={{ background: '#eee' }} />
-            <div className={styles.orderItemInfo}>
-              <p className={styles.orderItemName}>The Signature Cap</p>
-              <p className={styles.orderItemMeta}>Qty: 1 — Obsidian Black</p>
+        <div className="bg-surface-secondary p-8 border border-border-light mb-12">
+          <h3 className="text-label font-label uppercase text-brand-green mb-6">Order Summary</h3>
+          <div className="flex gap-4 py-4 border-b border-border-light">
+            <div className="w-20 aspect-[3/4] overflow-hidden bg-surface-tertiary" style={{ background: '#eee' }} />
+            <div className="flex-1">
+              <p className="font-semibold text-body-sm mb-1">The Signature Cap</p>
+              <p className="text-label text-text-muted">Qty: 1 — Obsidian Black</p>
             </div>
-            <span className={styles.orderItemPrice}>$145.00</span>
+            <span className="font-medium whitespace-nowrap">$145.00</span>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 16, fontWeight: 600 }}>
+          <div className="flex justify-between mt-4 font-semibold">
             <span>Total</span>
-            <span style={{ color: 'var(--color-green)', fontSize: 20 }}>$502.00</span>
+            <span className="text-brand-green text-xl">$502.00</span>
           </div>
         </div>
 
         {/* Shipping Form */}
-        <motion.div
-          className={styles.formSection}
+        <motion.div className="mb-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <h2>Shipping Information</h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-            <div className={styles.formRow}>
-              <div className={styles.formGroup}>
-                <label>First Name</label>
-                <input type="text" placeholder="Enter first name" />
+          <h2 className="font-display text-headline-sm uppercase tracking-tight text-brand-green mb-6">
+            Shipping Information
+          </h2>
+          <div className="flex flex-col gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="flex flex-col">
+                <label className="text-label font-label uppercase text-text-muted mb-2">First Name</label>
+                <input type="text" placeholder="Enter first name" className={inputClass} />
               </div>
-              <div className={styles.formGroup}>
-                <label>Last Name</label>
-                <input type="text" placeholder="Enter last name" />
+              <div className="flex flex-col">
+                <label className="text-label font-label uppercase text-text-muted mb-2">Last Name</label>
+                <input type="text" placeholder="Enter last name" className={inputClass} />
               </div>
             </div>
-            <div className={styles.formGroup}>
-              <label>Address Line 1</label>
-              <input type="text" placeholder="Street address, P.O. box" />
+            <div className="flex flex-col">
+              <label className="text-label font-label uppercase text-text-muted mb-2">Address Line 1</label>
+              <input type="text" placeholder="Street address, P.O. box" className={inputClass} />
             </div>
-            <div className={styles.formGroup}>
-              <label>Address Line 2 (Optional)</label>
-              <input type="text" placeholder="Apartment, suite, unit" />
+            <div className="flex flex-col">
+              <label className="text-label font-label uppercase text-text-muted mb-2">Address Line 2 (Optional)</label>
+              <input type="text" placeholder="Apartment, suite, unit" className={inputClass} />
             </div>
-            <div className={styles.formRow}>
-              <div className={styles.formGroup}>
-                <label>City</label>
-                <input type="text" placeholder="City" />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="flex flex-col">
+                <label className="text-label font-label uppercase text-text-muted mb-2">City</label>
+                <input type="text" placeholder="City" className={inputClass} />
               </div>
-              <div className={styles.formGroup}>
-                <label>Country</label>
-                <select>
+              <div className="flex flex-col">
+                <label className="text-label font-label uppercase text-text-muted mb-2">Country</label>
+                <select className="border-0 border-b border-border-light py-3 bg-transparent outline-none text-body-md text-text-primary focus:border-brand-green">
                   <option>Algeria</option>
                 </select>
               </div>
@@ -90,31 +102,34 @@ const Checkout = () => {
         </motion.div>
 
         {/* Payment */}
-        <motion.div
-          className={styles.formSection}
+        <motion.div className="mb-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <h2>Payment Methods</h2>
-          <div className={styles.paymentOption}>
-            <span className={styles.paymentOptionIcon}>$</span>
+          <h2 className="font-display text-headline-sm uppercase tracking-tight text-brand-green mb-6">Payment Methods</h2>
+
+          <div className="flex items-center gap-4 p-4 border border-brand-green bg-brand-green/5 mb-4">
+            <span className="text-2xl text-brand-green">$</span>
             <div>
-              <p className={styles.paymentOptionTitle}>Paiement à la livraison (Cash on Delivery)</p>
-              <p className={styles.paymentOptionDesc}>Pay in cash upon receiving your order.</p>
+              <p className="text-label font-label uppercase text-brand-green">
+                Paiement à la livraison (Cash on Delivery)
+              </p>
+              <p className="text-body-sm text-text-muted mt-1">Pay in cash upon receiving your order.</p>
             </div>
           </div>
 
-          <div style={{ paddingTop: 32 }}>
+          <div className="pt-8">
             <Button variant="green" size="full">
               Complete Purchase →
             </Button>
-            <p style={{ marginTop: 16, fontSize: 'var(--fs-body-sm)', color: 'var(--text-muted)', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+            <p className="mt-4 text-body-sm text-text-muted text-center flex items-center justify-center gap-2">
               <FiLock size={14} />
               Secured by 256-bit SSL technology
             </p>
           </div>
         </motion.div>
+
       </div>
     </div>
   );

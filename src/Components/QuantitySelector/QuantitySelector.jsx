@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './QuantitySelector.module.css';
+
 
 const QuantitySelector = ({ value = 1, onChange, label = 'Quantity' }) => {
   const decrease = () => {
@@ -11,19 +11,27 @@ const QuantitySelector = ({ value = 1, onChange, label = 'Quantity' }) => {
   };
 
   return (
-    <div className={styles.wrapper}>
-      <span className={styles.label}>{label}</span>
-      <div className={styles.selector}>
-        <button className={styles.btn} onClick={decrease} aria-label="Decrease quantity">
+    <div className="flex flex-col gap-2">
+      <span className="text-label text-text-muted uppercase tracking-widest">{label}</span>
+      <div className="flex items-center border border-border-light w-fit">
+        <button
+          className="px-4 py-2 text-base hover:bg-surface-tertiary"
+          onClick={decrease}
+          aria-label="Decrease quantity"
+        >
           −
         </button>
         <input
           type="number"
-          className={styles.value}
+          className="w-12 text-center text-body-md font-medium bg-transparent outline-none"
           value={value}
           readOnly
         />
-        <button className={styles.btn} onClick={increase} aria-label="Increase quantity">
+        <button
+          className="px-4 py-2 text-base hover:bg-surface-tertiary"
+          onClick={increase}
+          aria-label="Increase quantity"
+        >
           +
         </button>
       </div>

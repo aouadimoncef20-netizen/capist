@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FiX, FiChevronLeft, FiChevronRight, FiMaximize2 } from 'react-icons/fi';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import SectionTitle from '../Components/SectionTitle/SectionTitle';
-import styles from './Lookbook.module.css';
 
 const GALLERY_IMAGES = [
   {
@@ -101,8 +100,8 @@ const Lookbook = () => {
   };
 
   return (
-    <div className={styles.page}>
-      <div className={styles.container}>
+    <div className="py-12 lg:py-24 pb-20 lg:pb-[120px]">
+      <div className="max-w-container mx-auto px-margin-mobile lg:px-margin-desktop">
         <SectionTitle
           eyebrow="VISUAL NARRATIVE"
           title="THE LOOKBOOK"
@@ -110,7 +109,7 @@ const Lookbook = () => {
         />
 
         <motion.div
-          className={styles.masonry}
+          className="columns-2 lg:columns-2 xl:columns-3 gap-2 lg:gap-3 xl:gap-4 mt-8 lg:mt-12 xl:mt-16"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
@@ -118,15 +117,20 @@ const Lookbook = () => {
           {GALLERY_IMAGES.map((img, index) => (
             <motion.div
               key={index}
-              className={styles.masonryItem}
+              className="break-inside-avoid mb-2 lg:mb-3 xl:mb-4 relative overflow-hidden cursor-pointer group"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
               onClick={() => openModal(index)}
             >
-              <LazyLoadImage src={img.src} alt={img.alt} effect="opacity" />
-              <div className={styles.overlay}>
-                <FiMaximize2 className={styles.overlayIcon} />
+              <LazyLoadImage
+                src={img.src}
+                alt={img.alt}
+                effect="opacity"
+                className="w-full h-auto block transition-transform duration-700 active:scale-105 lg:group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
+                <FiMaximize2 className="text-white text-[28px] lg:text-[32px]" />
               </div>
             </motion.div>
           ))}
@@ -137,7 +141,7 @@ const Lookbook = () => {
       <AnimatePresence>
         {modalOpen && (
           <motion.div
-            className={styles.modalOverlay}
+            className="fixed inset-0 bg-black/95 z-[1000] flex items-center justify-center cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -147,32 +151,45 @@ const Lookbook = () => {
             onTouchEnd={handleTouchEnd}
           >
             <motion.div
-              className={styles.modalContent}
+              className="relative max-w-[100vw] max-h-[100vh] flex items-center justify-center px-3 py-[60px] lg:p-0 lg:max-w-[90vw] lg:max-h-[90vh]"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ duration: 0.3 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <button className={styles.modalClose} onClick={closeModal}>
+              <button
+                className="absolute top-3 right-3 lg:top-6 lg:right-6 w-11 h-11 lg:w-12 lg:h-12 bg-white/10 flex items-center justify-center text-white text-[22px] lg:text-2xl cursor-pointer transition-colors z-10 active:bg-white/20 lg:hover:bg-white/20 border-none"
+                onClick={closeModal}
+              >
                 <FiX />
               </button>
 
-              <button className={`${styles.modalNav} ${styles.modalPrev}`} onClick={goPrev}>
+              <button
+                className="absolute top-1/2 -translate-y-1/2 w-11 h-11 lg:w-12 lg:h-12 bg-white/10 flex items-center justify-center text-white text-[22px] lg:text-2xl cursor-pointer transition-colors z-10 active:bg-white/20 lg:hover:bg-white/20 border-none left-2 lg:left-6"
+                onClick={goPrev}
+              >
                 <FiChevronLeft />
               </button>
 
-              <img src={GALLERY_IMAGES[currentIndex].src} alt={GALLERY_IMAGES[currentIndex].alt} />
+              <img
+                src={GALLERY_IMAGES[currentIndex].src}
+                alt={GALLERY_IMAGES[currentIndex].alt}
+                className="max-w-full max-h-[calc(100vh-120px)] object-contain lg:max-h-[90vh]"
+              />
 
-              <button className={`${styles.modalNav} ${styles.modalNext}`} onClick={goNext}>
+              <button
+                className="absolute top-1/2 -translate-y-1/2 w-11 h-11 lg:w-12 lg:h-12 bg-white/10 flex items-center justify-center text-white text-[22px] lg:text-2xl cursor-pointer transition-colors z-10 active:bg-white/20 lg:hover:bg-white/20 border-none right-2 lg:right-6"
+                onClick={goNext}
+              >
                 <FiChevronRight />
               </button>
 
-              <p className={styles.counter}>
+              <p className="absolute bottom-[72px] lg:bottom-[100px] left-1/2 -translate-x-1/2 text-white/50 text-label font-label tracking-widest uppercase z-10">
                 {currentIndex + 1} / {GALLERY_IMAGES.length}
               </p>
 
-              <button className={styles.modalShopBtn}>
+              <button className="absolute bottom-4 lg:bottom-10 left-1/2 -translate-x-1/2 px-7 lg:px-10 py-3.5 lg:py-4 bg-brand-green text-white text-[10px] lg:text-label font-label tracking-widest uppercase cursor-pointer transition-colors z-10 whitespace-nowrap min-h-[44px] border-none active:bg-brand-green-dark lg:hover:bg-brand-green-dark">
                 Shop This Look
               </button>
             </motion.div>

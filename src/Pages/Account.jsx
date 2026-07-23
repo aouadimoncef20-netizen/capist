@@ -13,8 +13,8 @@ const MENU_ITEMS = [
 
 const Account = () => {
   return (
-    <div style={{ padding: '96px 0 120px' }}>
-      <div className="container-wide" style={{ maxWidth: '900px' }}>
+    <div className="pt-24 pb-[120px]">
+      <div className="container-wide max-w-[900px]">
         <SectionTitle
           eyebrow="WELCOME BACK"
           title="MY ACCOUNT"
@@ -22,33 +22,18 @@ const Account = () => {
         />
 
         <motion.div
-          style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: 'var(--gutter)', marginTop: '48px' }}
+          className="grid grid-cols-[280px_1fr] gap-gutter mt-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
           {/* Sidebar */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+          <div className="flex flex-col gap-1">
             {MENU_ITEMS.map((item) => (
               <button
                 key={item.label}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '12px',
-                  padding: '14px 16px',
-                  background: 'none',
-                  border: 'none',
-                  fontSize: 'var(--fs-body-sm)',
-                  fontWeight: 500,
-                  color: item.color || 'var(--text-primary)',
-                  cursor: 'pointer',
-                  transition: 'background var(--transition-fast)',
-                  textAlign: 'left',
-                  width: '100%',
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.background = 'var(--bg-secondary)'}
-                onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                className="flex items-center gap-3 px-4 py-[14px] text-body-sm font-medium w-full text-left cursor-pointer hover:bg-surface-secondary transition-[background] duration-fast"
+                style={{ color: item.color || undefined }}
               >
                 <item.icon size={18} />
                 {item.label}
@@ -57,30 +42,30 @@ const Account = () => {
           </div>
 
           {/* Content */}
-          <div style={{
-            padding: '32px',
-            border: '1px solid var(--border-light)',
-            minHeight: '300px',
-          }}>
-            <h3 style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'var(--fs-headline-sm)',
-              marginBottom: '16px',
-            }}>
+          <div className="p-8 border border-border-light min-h-[300px]">
+            <h3 className="font-display text-headline-sm mb-4">
               Profile
             </h3>
-            <p style={{ color: 'var(--text-secondary)', marginBottom: '32px' }}>
+            <p className="text-text-secondary mb-8">
               Manage your personal information and preferences.
             </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '400px' }}>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <label style={{ fontSize: 'var(--fs-label)', fontWeight: 'var(--fw-label)', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '8px' }}>Full Name</label>
-                <input type="text" defaultValue="John Doe" style={{ border: 'none', borderBottom: '1px solid var(--border-light)', padding: '10px 0', background: 'transparent', outline: 'none', fontSize: 'var(--fs-body-md)' }} />
+            <div className="flex flex-col gap-5 max-w-[400px]">
+              <div className="flex flex-col">
+                <label className="text-label uppercase text-text-muted mb-2">Full Name</label>
+                <input
+                  type="text"
+                  defaultValue="John Doe"
+                  className="border-0 border-b border-border-light py-2.5 bg-transparent outline-none text-body-md"
+                />
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <label style={{ fontSize: 'var(--fs-label)', fontWeight: 'var(--fw-label)', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '8px' }}>Email</label>
-                <input type="email" defaultValue="john@example.com" style={{ border: 'none', borderBottom: '1px solid var(--border-light)', padding: '10px 0', background: 'transparent', outline: 'none', fontSize: 'var(--fs-body-md)' }} />
+              <div className="flex flex-col">
+                <label className="text-label uppercase text-text-muted mb-2">Email</label>
+                <input
+                  type="email"
+                  defaultValue="john@example.com"
+                  className="border-0 border-b border-border-light py-2.5 bg-transparent outline-none text-body-md"
+                />
               </div>
             </div>
           </div>

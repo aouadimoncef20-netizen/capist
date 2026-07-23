@@ -7,7 +7,7 @@ const Favorites = () => {
   const favoriteProducts = products;
 
   return (
-    <div style={{ padding: '96px 0 120px' }}>
+    <div className="py-24 lg:py-[120px]">
       <div className="container-wide">
         <SectionTitle
           eyebrow="YOUR COLLECTION"
@@ -21,13 +21,7 @@ const Favorites = () => {
           transition={{ duration: 0.6 }}
         >
           {favoriteProducts.length > 0 ? (
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(4, 1fr)',
-                gap: 'var(--gutter)',
-              }}
-            >
+            <div className="grid grid-cols-4 gap-gutter">
               {favoriteProducts.map((product, idx) => (
                 <motion.div
                   key={product.id}
@@ -40,8 +34,8 @@ const Favorites = () => {
               ))}
             </div>
           ) : (
-            <div style={{ textAlign: 'center', padding: '80px 0', color: 'var(--text-muted)' }}>
-              <p style={{ fontSize: 'var(--fs-body-lg)', marginBottom: 16 }}>
+            <div className="text-center py-20 text-text-muted">
+              <p className="text-lg mb-4">
                 Your favorites list is empty.
               </p>
               <p>Start exploring our collection and save items you love.</p>

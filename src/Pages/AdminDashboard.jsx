@@ -11,7 +11,7 @@ const STATS = [
 
 const AdminDashboard = () => {
   return (
-    <div style={{ padding: '96px 0 120px' }}>
+    <div className="pt-24 pb-[120px]">
       <div className="container-wide">
         <SectionTitle
           eyebrow="ADMIN"
@@ -20,12 +20,7 @@ const AdminDashboard = () => {
         />
 
         <motion.div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: 'var(--gutter)',
-            marginTop: '48px',
-          }}
+          className="grid grid-cols-4 gap-gutter mt-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
@@ -33,31 +28,15 @@ const AdminDashboard = () => {
           {STATS.map((stat, idx) => (
             <motion.div
               key={stat.label}
-              style={{
-                padding: '32px',
-                border: '1px solid var(--border-light)',
-                textAlign: 'center',
-              }}
+              className="p-8 border border-border-light text-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: idx * 0.05 }}
             >
-              <p style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'var(--fs-headline-lg)',
-                fontWeight: 'var(--fw-display)',
-                color: 'var(--color-green)',
-                marginBottom: '8px',
-              }}>
+              <p className="font-display text-headline-lg text-brand-green mb-2">
                 {stat.value}
               </p>
-              <p style={{
-                fontSize: 'var(--fs-label)',
-                fontWeight: 'var(--fw-label)',
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                color: 'var(--text-muted)',
-              }}>
+              <p className="text-label uppercase text-text-muted">
                 {stat.label}
               </p>
             </motion.div>
@@ -66,26 +45,22 @@ const AdminDashboard = () => {
 
         {/* Orders Table */}
         <motion.div
-          style={{ marginTop: '80px' }}
+          className="mt-20"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h3 style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'var(--fs-headline-sm)',
-            marginBottom: '24px',
-          }}>
+          <h3 className="font-display text-headline-sm mb-6">
             Recent Orders
           </h3>
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse">
               <thead>
-                <tr style={{ borderBottom: '1px solid var(--border-light)' }}>
-                  <th style={{ textAlign: 'left', padding: '12px 16px', fontSize: 'var(--fs-label)', fontWeight: 'var(--fw-label)', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>Order</th>
-                  <th style={{ textAlign: 'left', padding: '12px 16px', fontSize: 'var(--fs-label)', fontWeight: 'var(--fw-label)', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>Customer</th>
-                  <th style={{ textAlign: 'left', padding: '12px 16px', fontSize: 'var(--fs-label)', fontWeight: 'var(--fw-label)', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>Status</th>
-                  <th style={{ textAlign: 'right', padding: '12px 16px', fontSize: 'var(--fs-label)', fontWeight: 'var(--fw-label)', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>Total</th>
+                <tr className="border-b border-border-light">
+                  <th className="text-left p-3 text-label uppercase text-text-muted">Order</th>
+                  <th className="text-left p-3 text-label uppercase text-text-muted">Customer</th>
+                  <th className="text-left p-3 text-label uppercase text-text-muted">Status</th>
+                  <th className="text-right p-3 text-label uppercase text-text-muted">Total</th>
                 </tr>
               </thead>
               <tbody>
@@ -96,30 +71,28 @@ const AdminDashboard = () => {
                   { id: '#1039', customer: 'Riley P.', status: 'Delivered', total: '$95.00' },
                   { id: '#1038', customer: 'Taylor W.', status: 'Cancelled', total: '$165.00' },
                 ].map((order) => (
-                  <tr key={order.id} style={{ borderBottom: '1px solid var(--border-light)' }}>
-                    <td style={{ padding: '14px 16px', fontWeight: 600 }}>{order.id}</td>
-                    <td style={{ padding: '14px 16px', color: 'var(--text-secondary)' }}>{order.customer}</td>
-                    <td style={{ padding: '14px 16px' }}>
-                      <span style={{
-                        fontSize: '10px',
-                        fontWeight: 'var(--fw-label)',
-                        letterSpacing: '0.1em',
-                        textTransform: 'uppercase',
-                        padding: '4px 8px',
-                        background:
-                          order.status === 'Delivered' ? 'rgba(46,139,87,0.1)' :
-                          order.status === 'Shipped' ? 'rgba(0,0,0,0.05)' :
-                          order.status === 'Cancelled' ? 'rgba(186,26,26,0.1)' :
-                          'rgba(0,0,0,0.03)',
-                        color:
-                          order.status === 'Delivered' ? 'var(--color-green)' :
-                          order.status === 'Cancelled' ? '#ba1a1a' :
-                          'var(--text-primary)',
-                      }}>
+                  <tr key={order.id} className="border-b border-border-light">
+                    <td className="p-[14px_16px] font-semibold">{order.id}</td>
+                    <td className="p-[14px_16px] text-text-secondary">{order.customer}</td>
+                    <td className="p-[14px_16px]">
+                      <span
+                        className="text-[10px] font-semibold tracking-[0.1em] uppercase px-2 py-1"
+                        style={{
+                          backgroundColor:
+                            order.status === 'Delivered' ? 'rgba(46,139,87,0.1)' :
+                            order.status === 'Shipped' ? 'rgba(0,0,0,0.05)' :
+                            order.status === 'Cancelled' ? 'rgba(186,26,26,0.1)' :
+                            'rgba(0,0,0,0.03)',
+                          color:
+                            order.status === 'Delivered' ? 'var(--color-green)' :
+                            order.status === 'Cancelled' ? '#ba1a1a' :
+                            'var(--text-primary)',
+                        }}
+                      >
                         {order.status}
                       </span>
                     </td>
-                    <td style={{ padding: '14px 16px', textAlign: 'right', fontWeight: 500 }}>{order.total}</td>
+                    <td className="p-[14px_16px] text-right font-medium">{order.total}</td>
                   </tr>
                 ))}
               </tbody>

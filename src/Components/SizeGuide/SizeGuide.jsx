@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Modal from '../Modal/Modal';
-import styles from './SizeGuide.module.css';
 
 const SIZES = [
   { size: 'One Size', head: '56–60 cm', fit: 'Standard' },
@@ -14,27 +13,27 @@ const SizeGuide = () => {
 
   return (
     <>
-      <button className={styles.trigger} onClick={() => setIsOpen(true)}>
+      <button className="text-label font-label tracking-widest uppercase underline underline-offset-4 text-text-muted hover:text-brand-green bg-none border-none cursor-pointer" onClick={() => setIsOpen(true)}>
         Size Guide
       </button>
 
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <div className={styles.guideContent}>
-          <h2>Size Guide</h2>
-          <table className={styles.table}>
+        <div>
+          <h2 className="font-display text-headline-sm mb-6">Size Guide</h2>
+          <table className="w-full border-collapse">
             <thead>
               <tr>
-                <th>Size</th>
-                <th>Head Circumference</th>
-                <th>Fit</th>
+                <th className="text-left p-3 border-b border-border-light text-label text-text-muted uppercase tracking-widest">Size</th>
+                <th className="text-left p-3 border-b border-border-light text-label text-text-muted uppercase tracking-widest">Head Circumference</th>
+                <th className="text-left p-3 border-b border-border-light text-label text-text-muted uppercase tracking-widest">Fit</th>
               </tr>
             </thead>
             <tbody>
               {SIZES.map((s) => (
                 <tr key={s.size}>
-                  <td>{s.size}</td>
-                  <td>{s.head}</td>
-                  <td>{s.fit}</td>
+                  <td className="text-left p-3 border-b border-border-light text-body-sm">{s.size}</td>
+                  <td className="text-left p-3 border-b border-border-light text-body-sm">{s.head}</td>
+                  <td className="text-left p-3 border-b border-border-light text-body-sm">{s.fit}</td>
                 </tr>
               ))}
             </tbody>

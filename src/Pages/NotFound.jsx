@@ -5,46 +5,22 @@ import Button from '../Components/Button/Button';
 
 const NotFound = () => {
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '70vh',
-      textAlign: 'center',
-      padding: '40px 20px',
-    }}>
+    <div className="flex flex-col items-center justify-center min-h-[70vh] text-center px-5 py-10">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <p style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: '120px',
-          fontWeight: 'var(--fw-display)',
-          color: 'var(--color-green)',
-          lineHeight: 1,
-          marginBottom: '16px',
-        }}>
+        <p className="font-display text-[120px] text-brand-green leading-none mb-4">
           404
         </p>
-        <h1 style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: 'var(--fs-headline-md)',
-          marginBottom: '16px',
-        }}>
+        <h1 className="font-display text-headline-md mb-4">
           Page Not Found
         </h1>
-        <p style={{
-          fontSize: 'var(--fs-body-lg)',
-          color: 'var(--text-secondary)',
-          marginBottom: '40px',
-          maxWidth: '480px',
-        }}>
+        <p className="text-body-lg text-text-secondary mb-10 max-w-[480px]">
           The page you&apos;re looking for doesn&apos;t exist or has been moved.
         </p>
-        <Link to="/" style={{ textDecoration: 'none' }}>
+        <Link to="/" className="no-underline">
           <Button variant="primary" size="lg">
             Back to Home
           </Button>
