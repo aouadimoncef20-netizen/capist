@@ -1,0 +1,91 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  border: none;
+  line-height: 1;
+  white-space: nowrap;
+  min-height: var(--touch-target);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Variants */
+.primary {
+  background: var(--color-black);
+  color: var(--text-on-dark);
+}
+
+.primary:active {
+  background: var(--color-green);
+  transform: scale(0.97);
+}
+@media (min-width: 768px) { .primary:hover { background: var(--color-green); } }
+
+.secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--color-black);
+}
+
+.secondary:active {
+  background: var(--color-black);
+  color: var(--text-on-dark);
+  transform: scale(0.97);
+}
+@media (min-width: 768px) { .secondary:hover { background: var(--color-black); color: var(--text-on-dark); } }
+
+.ghost {
+  background: transparent;
+  color: var(--text-primary);
+}
+.ghost:active { color: var(--color-green); }
+@media (min-width: 768px) { .ghost:hover { color: var(--color-green); } }
+
+.green {
+  background: var(--color-green);
+  color: var(--text-on-green);
+}
+.green:active { background: var(--color-green-dark); transform: scale(0.97); }
+@media (min-width: 768px) { .green:hover { background: var(--color-green-dark); } }
+
+.outlineWhite {
+  background: transparent;
+  color: white;
+  border: 1px solid white;
+}
+.outlineWhite:active { background: white; color: var(--color-black); transform: scale(0.97); }
+@media (min-width: 768px) { .outlineWhite:hover { background: white; color: var(--color-black); } }
+
+/* Sizes */
+.sm {
+  padding: 12px 20px;
+  font-size: 11px;
+}
+
+.md {
+  padding: 14px 28px;
+}
+
+.lg {
+  padding: 16px 32px;
+}
+
+.full {
+  width: 100%;
+  padding: 16px 24px;
+}
+
+@media (min-width: 768px) {
+  .sm { padding: 10px 20px; }
+  .md { padding: 16px 32px; }
+  .lg { padding: 20px 40px; }
+  .full { padding: 16px 32px; }
+}

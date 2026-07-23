@@ -1,0 +1,361 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>CAPIST | Architectural Precision in Headwear</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400..900;1,400..900&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#79db8d",
+                        "inverse-surface": "#2a313d",
+                        "surface-container-low": "#f0f3ff",
+                        "secondary-fixed-dim": "#bdc7d9",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#ebf1ff",
+                        "on-secondary-container": "#596373",
+                        "primary": "#00652c",
+                        "on-surface": "#151c27",
+                        "on-surface-variant": "#3f493f",
+                        "on-tertiary-container": "#fff1f1",
+                        "background": "#f9f9ff",
+                        "surface-variant": "#dce2f3",
+                        "surface": "#f9f9ff",
+                        "surface-dim": "#d3daea",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#d9e3f6",
+                        "on-primary-fixed-variant": "#005323",
+                        "primary-fixed-dim": "#79db8d",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#d3ffd5",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb2bd",
+                        "outline": "#6f7a6e",
+                        "surface-tint": "#006d30",
+                        "surface-container-high": "#e2e8f8",
+                        "secondary-container": "#d6e0f3",
+                        "surface-container-highest": "#dce2f3",
+                        "primary-fixed": "#95f8a7",
+                        "tertiary-fixed": "#ffd9dd",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f9f9ff",
+                        "on-secondary-fixed": "#121c2a",
+                        "on-secondary-fixed-variant": "#3d4756",
+                        "primary-container": "#15803d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#97344a",
+                        "on-error-container": "#93000a",
+                        "outline-variant": "#becabc",
+                        "surface-container": "#e7eefe",
+                        "on-tertiary-fixed-variant": "#81233b",
+                        "on-primary-fixed": "#00210a",
+                        "tertiary-container": "#b64c62",
+                        "secondary": "#555f6f",
+                        "on-background": "#151c27",
+                        "on-tertiary-fixed": "#400013"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "32px",
+                        "margin-mobile": "20px",
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Bodoni Moda"],
+                        "display-lg": ["Bodoni Moda"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-sm": ["Bodoni Moda"],
+                        "label-caps": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-lg-mobile": ["Bodoni Moda"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .hero-gradient { background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 60%); }
+        .vignette { background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 40%); }
+        body { background-color: #ffffff; color: #151c27; }
+        .scroll-hide::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md dark:bg-on-surface/80 border-b border-outline-variant/30">
+<nav class="flex justify-between items-center h-20 px-margin-desktop max-w-container-max mx-auto">
+<div class="flex items-center gap-12">
+<a class="font-display-lg text-display-lg-mobile tracking-tighter text-on-surface dark:text-inverse-on-surface" href="#">CAPIST</a>
+<div class="hidden md:flex gap-unit*4">
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-label-caps text-label-caps tracking-widest cursor-pointer transition-opacity hover:opacity-80" href="#">LUXURY</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-label-caps text-label-caps tracking-widest hover:text-primary dark:hover:text-inverse-primary transition-colors duration-300 cursor-pointer transition-opacity hover:opacity-80 ml-8" href="#">STREETWEAR</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-label-caps text-label-caps tracking-widest hover:text-primary dark:hover:text-inverse-primary transition-colors duration-300 cursor-pointer transition-opacity hover:opacity-80 ml-8" href="#">SPORTS</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-label-caps text-label-caps tracking-widest hover:text-primary dark:hover:text-inverse-primary transition-colors duration-300 cursor-pointer transition-opacity hover:opacity-80 ml-8" href="#">EXCLUSIVES</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-label-caps text-label-caps tracking-widest hover:text-primary dark:hover:text-inverse-primary transition-colors duration-300 cursor-pointer transition-opacity hover:opacity-80 ml-8" href="#">BEST SELLERS</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined cursor-pointer text-on-surface">search</span>
+<span class="material-symbols-outlined cursor-pointer text-on-surface">favorite</span>
+<span class="material-symbols-outlined cursor-pointer text-on-surface">shopping_bag</span>
+<span class="material-symbols-outlined cursor-pointer text-on-surface">person</span>
+</div>
+</nav>
+</header>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative h-[921px] overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" data-alt="A moody, high-fashion editorial portrait of a male model wearing a premium black CAPIST baseball cap. He is positioned in front of a brutalist concrete building with sharp architectural shadows cast by low-angle sunlight. The scene is dramatic and minimalist, featuring a color palette of deep charcoal, cool concrete grays, and high-contrast light. The mood is sophisticated and mysterious." style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAfP69gmshrqm9my7jkGwIQ5EsGIy5snyRBj7OfWUNH5m4IrDZssmQLH9ZgdiOUKIwBb50DcDx-mSOHZSsukmvUEoXI6La93Xit16j4x7bb5oRmtAuVCKB8lmOWk8zB94EcQyWFcriUOpZn-boN5IzBmpk9FisEEem0_J3DMWLVQ0UK1sIA__WFf2tm9SBdY17A782hCip_58suVKWP8OfbMv9zlhBNA4U1KroXn_zyS6U0mpe-SZS3SQ&quot;);"></div>
+<div class="absolute inset-0 hero-gradient"></div>
+<div class="relative z-10 h-full flex flex-col justify-center px-margin-desktop max-w-container-max mx-auto text-white">
+<h1 class="font-display-lg text-display-lg-mobile max-w-2xl mb-6 drop-shadow-lg">OWN YOUR STYLE</h1>
+<p class="font-body-lg text-body-lg max-w-lg mb-10 opacity-90 drop-shadow-md">Architectural precision meets heritage craftsmanship. Discover the collection that defines modern luxury headwear.</p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary px-10 py-5 font-label-caps text-label-caps text-white transition-all hover:bg-primary-container active:scale-95">SHOP COLLECTION</button>
+<button class="border border-white px-10 py-5 font-label-caps text-label-caps text-white transition-all hover:bg-white hover:text-on-surface active:scale-95">EXPLORE CATEGORIES</button>
+</div>
+</div>
+</section>
+<!-- Value Props -->
+<section class="bg-surface py-12 border-b border-outline-variant/20"></section>
+<!-- Featured Collections Grid -->
+
+<!-- New Arrivals -->
+<section class="py-24 bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="flex justify-between items-end mb-12">
+<div>
+<span class="font-label-caps text-label-caps text-primary mb-2 block">FRESH DROPS</span>
+<h2 class="font-display-lg text-display-lg-mobile text-on-surface">NEW ARRIVALS</h2>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Product 1 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[4/5] bg-surface mb-6 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Product photography of a sleek, all-black stealth baseball cap with a matte finish. It is shot against a stark white background with minimal shadows to emphasize its architectural form. The lighting is crisp and even, highlighting the premium stitching and material quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAy6MdN5UiGUyG2LMjskwElbi85OCHQYEkDrvolb_-cg4m6Gidm1Y2HRmWPQ8B9ncZBteo7pYSyJ6yizStLu6k9f2hma5PVLLlaowhltMa-0__Is5W2OPXPn17bpXxaLdWVgjh71p-zYYt0eLvOzD823oOmet0i9YiGiLN3NuccHpip8fmHjnomGJlKXX5uMX_u35IydlqQ4b2u1qEdMJzCykEYDPiM_ZLbz-e1F3WSpgxgRmYsyBWpaw">
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">LUXURY EDITIONS</p>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">BLACK STEALTH CAP</h3>
+<p class="font-body-md text-body-md text-primary font-bold">$125.00</p>
+</div>
+<!-- Product 2 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[4/5] bg-surface mb-6 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Detailed shot of a classic beige baseball cap made from premium heavy cotton twill. The cap is presented at a three-quarter angle against a neutral off-white background. Soft, natural lighting brings out the organic texture of the fabric. The vibe is timeless and essential luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqZwMj59m7-6SoIOQLw22WUr17od9YrAEpY30nns5eZDNGwB49m--sFsVjTLN4vgSDNw5PLecQLCtW10I7HRkQ1UlEmav7hCxT2geFAvKcxdJULlfhWt5SR6OnMj6b4dS9Bjkx1wtt465hIZJT7I1rrauvszG6RmaSn_X897xrb73xpPMAbnyzV-b6wDTEt10LDJZ9f2DbeBpTBMq56qKLvd8G02c-4MyJX3qT-MBKopjFj2G4Do5wKA">
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">ESSENTIALS</p>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">BEIGE CLASSIC</h3>
+<p class="font-body-md text-body-md text-primary font-bold">$95.00</p>
+</div>
+<!-- Product 3 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[4/5] bg-surface mb-6 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="High-contrast studio photography of a forest green structured cap with a vintage collegiate embroidered patch. The cap sits on a mirrored black surface, reflecting its deep green color and white embroidery. The mood is bold, sporty, and prestigious." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAy1vexZOvVtEfWzqKrhrKCXKdT00RolK3Xi4kPy0dk3_3xwLO-tu2rFyoqQP_U5ri4M3aru0CjWhTf9Qgvf_LziFiiyc0A_qSS_q-EBECgDsPS_iprn10KERdCEDY0-J0_dY9Bs7XDq76Z5bnwacb6dbj8w5aodS5YcynpaN-Xkk4GsTrqR6bcN_5x2PAbmbSrzzAbHFOp9zCAGnFSvshSIFLGtRfjgjU1kFHuFt0sgqwWRX-_YkjvUQ">
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">SPORTS SERIES</p>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">BIO LEAGUE GREEN</h3>
+<p class="font-body-md text-body-md text-primary font-bold">$85.00</p>
+</div>
+<!-- Product 4 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-[4/5] bg-surface mb-6 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A portrait-style product shot of a dark oak brown heritage cap made from brushed wool. It is displayed on a classic hat stand against a warm beige background. The lighting is soft and golden, accentuating the cozy yet refined texture of the wool. A perfect blend of heritage style and modern craftsmanship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBokAh-6RpR5vm7uwuOAzdFRITG5BJTNSdgsoeudN4TT_e8Dd0mG9tP625dCn8Vty0Z-9Ob4cWfaySG2h0szyjtNQN837iXKNwLdrgGwLg94lPzjLw7Vp0jA-5Wdyk82rXpDWd9O9AujQxPD_EhIixhpsIWzKdvLX0j0cILnIkV5C79qEgk6s2OzD-GhlOoGUJWJ_tXHgOzhcXWiW9uKDXtaJ3GCB2wynqZgMrlftJU8g7Lzd0mbLAmKw">
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">HERITAGE</p>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">HERITAGE OLDWOOD</h3>
+<p class="font-body-md text-body-md text-primary font-bold">$110.00</p>
+</div>
+</div>
+<div class="mt-16 text-center">
+<button class="border border-on-surface px-12 py-5 font-label-caps text-label-caps text-on-surface hover:bg-on-surface hover:text-white transition-all">VIEW ALL PRODUCTS</button>
+</div>
+</div>
+</section>
+<!-- Brand Editorial -->
+<section class="py-24 px-margin-desktop max-w-container-max mx-auto bg-surface">
+  <div class="text-center mb-16">
+    <span class="font-label-caps text-label-caps text-primary mb-4 block">CURATED SELECTIONS</span>
+    <h2 class="font-display-lg text-display-lg-mobile text-on-surface">DISCOVER THE COLLECTIONS</h2>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+    <!-- LUXURY -->
+    <div class="relative overflow-hidden group aspect-[5/6]">
+      <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida/AP1WRLtMBYq-PhsJtFTViI7ca4Yiio1wf0jKeS0cp4Rwj6fieQT6kkrOO1Oiyv1fA7FhRHIKMGc1Hwzv3BsZaYCgZh40NldVr8BWBfBNoM7uHvMD0j37E4U9E42mF5UczDlPlJaNRCq6SNEbmCL22UkH1Xz7Je-s3_cET8PlkrNYGS-fweYY-xtTtq_BtSILy1cuLWjE7SUAi8HDl9y2Hb3MZ8jUbp9wOlcCXsM9F8wqi0nl-5C9x8rD9BkolGk&quot;);"></div>
+      <div class="absolute inset-0 vignette"></div>
+      <div class="absolute bottom-10 left-10 text-white">
+        <span class="font-label-caps text-label-caps mb-2 block opacity-80">EDITORIAL</span>
+        <h3 class="font-headline-md text-headline-md mb-4">LUXURY</h3>
+        <a class="border-b border-white pb-1 font-label-caps text-label-caps hover:opacity-70 transition-opacity" href="#">DISCOVER COLLECTION</a>
+      </div>
+    </div>
+    <!-- UNIVERSITY -->
+    <div class="relative overflow-hidden group aspect-[5/6]">
+      <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida/AP1WRLuq-DDojmKZUT7TOMzome8B-bSJMe--Do8YfZPqn9tRCYY00ye8FtErVDEErfYdjgBTuxg2h2TkhTE-jM78s53kYw8Dm44QxlJmw2MBUSU2KPbj6wL78hd7NPUwAUKxuNyWPrkq4S_pBs8rwULh8DcgupWkL6fTPHCi3TbgckUT8pjdLx67Fco9DVAk6-wR7VwyNHTe44Xilzv22kwONvO3c1GQWxUVD8U62oNl8YUlzwdcQpKcnAsKbnMw&quot;);"></div>
+      <div class="absolute inset-0 vignette"></div>
+      <div class="absolute bottom-10 left-10 text-white">
+        <span class="font-label-caps text-label-caps mb-2 block opacity-80">HERITAGE</span>
+        <h3 class="font-headline-md text-headline-md mb-4">UNIVERSITY</h3>
+        <a class="border-b border-white pb-1 font-label-caps text-label-caps hover:opacity-70 transition-opacity" href="#">EXPLORE</a>
+      </div>
+    </div>
+    <!-- STREETWEAR -->
+    <div class="relative overflow-hidden group aspect-[5/6]">
+      <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida/AP1WRLvwTNqg-_ySmbMTqKBlxbo7JXfHdYrjWv2gERuW5IlHGVMEqiRYWSmU7mGObPEfzH91BrWuopbK_Uhn4jkPehaX9GHcthE4e4ruQ_aVHMOHLtjBQqyJpbMHx4yuByTtLBYH_VfdCTmVV7sRWONt0m0vLK8nxBexXPGxvu-FJRRMSLu4ev0c-ZXv3kollAkRJCjF3hmZpoOhy01cDyOSamjwPGxEiNz4KYYhKebc-tItiM3F-E2DW9WsGP_9&quot;);"></div>
+      <div class="absolute inset-0 vignette"></div>
+      <div class="absolute bottom-10 left-10 text-white">
+        <span class="font-label-caps text-label-caps mb-2 block opacity-80">URBAN GRIT</span>
+        <h3 class="font-headline-md text-headline-md mb-4">STREETWEAR</h3>
+        <a class="border-b border-white pb-1 font-label-caps text-label-caps hover:opacity-70 transition-opacity" href="#">SHOP NOW</a>
+      </div>
+    </div>
+    <!-- SPORTS -->
+    <div class="relative overflow-hidden group aspect-[5/6]">
+      <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida/AP1WRLva6uYc__Q4mDcJXmVwBPA2zONkr3vqBIhn6jmX71gwgCXp9qfh9W8Lua0z5AusX4B0TLfxFvDxa9h40n7ZGloqDIpHj0Ihui-iQhMgYec4krGs-HmXxRyDk2Ci6FhrWd2iErkhFcHubnFjXxfSp4T5DFAWBpcEMKZZteQ4G2r5pJN1t5-Hqu3kVD1ICjpMk3AIaa5g6YWNdz5uEY7G6y79ioIJt-EhLuhqQ9tQULL7mpt9nPCxV8ab1A_e&quot;);"></div>
+      <div class="absolute inset-0 vignette"></div>
+      <div class="absolute bottom-10 left-10 text-white">
+        <span class="font-label-caps text-label-caps mb-2 block opacity-80">PERFORMANCE</span>
+        <h3 class="font-headline-md text-headline-md mb-4">SPORTS</h3>
+        <a class="border-b border-white pb-1 font-label-caps text-label-caps hover:opacity-70 transition-opacity" href="#">VIEW GEAR</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Partners & Instagram -->
+<section class="py-24 border-y border-outline-variant/20">
+<div class="max-w-container-max mx-auto px-margin-desktop mb-24">
+<div class="flex flex-wrap justify-between items-center opacity-40 gap-8 grayscale">
+<span class="font-display-lg text-headline-sm">NIKE</span>
+<span class="font-display-lg text-headline-sm">ADIDAS</span>
+<span class="font-display-lg text-headline-sm">NEW ERA</span>
+<span class="font-display-lg text-headline-sm">STUSSY</span>
+<span class="font-display-lg text-headline-sm">CARHARTT</span>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="text-center mb-12">
+<h2 class="font-headline-md text-headline-md mb-2">Instagram Shop</h2>
+<p class="font-label-caps text-label-caps text-primary tracking-[0.2em]">@CAPIST_DESIGN</p>
+</div>
+<div class="grid grid-cols-3 md:grid-cols-6 gap-2">
+<div class="aspect-square bg-surface hover:opacity-80 transition-opacity cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="Instagram-style lifestyle photo: A person leaning against a minimalist glass railing in a high-rise building, wearing a black CAPIST cap. The background shows a soft-focus cityscape at sunset. The aesthetic is clean, modern, and aspirational." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaC1zMuSUjBHOMv_sSsBkDgokQIIA-NDMhPaw3IGe1m18Ucfko7_D9kcMQRAjirgxla7tRzbpPoEsV9VlgfHyWbkwMpVnVzqUKB4nuZB3Ig1TzNu9Trwr-kFvb1-Z0sadaN9qzWcblPz4zz919QevyavPb7ruoYUYDAB_Db-M_vtT8k3RD5cZtdh2sPq24Ool6NND4k4M0AKt3JXwTvLhRw6IbBINo9tS4-w929SVkzeaZm5e6mfXtyQ">
+</div>
+<div class="aspect-square bg-surface hover:opacity-80 transition-opacity cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="Instagram-style lifestyle photo: Close-up of a hand holding an iced coffee next to a green CAPIST cap on a marble cafe table. Sunny morning light, Parisian street style vibes. Minimalist and chic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF4bfFdTu_bXkIWi0ndtXEcO0AL6PRNtYUUIsQk_RhTxzOnN8vghqA3lQFZBIEtRJevtuGDPVNqH5IWnvpRhdXee8s8zjATmbI3oacvW8HzfdapN1nfkr7z4NEXNl1LUE4LwoJ0phAWoJJpijhQqP-b2b2N6xUlhkNmDoCyI_z4Nl0dt7diwrf35SSGWP-sChwPnAKNz4hbrcJUK2UTyNhsU_L5IBvypP-yBXcEmC4Xv4DM3J9h9Q_yg">
+</div>
+<div class="aspect-square bg-surface hover:opacity-80 transition-opacity cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="Instagram-style lifestyle photo: A black and white architectural shot of a modern museum entrance with a person in the distance wearing a CAPIST cap. Sharp lines, deep shadows, and high contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAL6nUs4LAlp-JHq8WzhcFbdXATFYkYm3y4p_U7FnPhKpv_BkFt_tuuhAZezvyH9yyi4V-XXHGKXWoqcJIIxNyS0HC8bRlZNqT145gVixZ0Crum-uWl2IcD6JbfauyyDpZ9964ZRD0ZTOtXmwxkuCVH3JhjMQo7EqmELcRhzCugGd0DyWLKrfIVNB5-OT6cwRBDKtYPNobXL9xoyPWs-sCygEr6Q26qJQZy2D0e3aS3WSoaSRzZbop6Q">
+</div>
+<div class="aspect-square bg-surface hover:opacity-80 transition-opacity cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="Instagram-style lifestyle photo: Two friends laughing in a metropolitan subway station, both wearing different styles of CAPIST caps. Motion blur in the background, urban energy, cool tone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc0Oiar9gq2ZM6cbUiVXClxe_RE6MAnZmhwE0GlaqFYXsLbIm75MNOLEh1kkHKGMB6FHycfOvmMBLGb-azXNRkbskkQg04Gn-Y7PfRjdP3pXoLM2b6YUDzGqv46MVTPlHmw4lvnWTStZqmJHUAutGD24g9F9VVkkCOueFCTpCfIZ_hKDmbMetWfsAtnUc08sehkGPQkaMVlJmO_SuJU9gZXMV5asxIUn4PAYSxBM6hd4lWExD4nedi-g">
+</div>
+<div class="aspect-square bg-surface hover:opacity-80 transition-opacity cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="Instagram-style lifestyle photo: A minimalist flat lay of travel essentials: a leather passport holder, noise-canceling headphones, and a beige CAPIST corduroy cap. Light wood background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvUxmp4hQvsGTp6_Tn4M78nIq35fhbIZDVgMoJHHm3Jv54Bz84-BEAfPKVYv4nLhePdijfoYKQ9Y3DZ40g088DcVQYvoo2qiTINFHR_zPNki-Vjp6BwVkZ2lcAv05hKnEAQhx1xoAVxw6XEZr5vkUIc1PMeSttx1UU2xFps5U-eMzp0kgZviNH2AGxTzOmZaXHKTlciQpWr_snhCs-nNkgC2BdHc-YXSE3mubXEBVg0ls7QJM7gY21Qg">
+</div>
+<div class="aspect-square bg-surface hover:opacity-80 transition-opacity cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="Instagram-style lifestyle photo: A person walking through an art gallery, silhouette against a large white canvas, wearing a structured black cap. Conceptual and artistic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQud-JQhu8owbn32kP89YU21QpjTq1lMCXBtgZB_zN5FTPhUlt5SEX590y4_DBSNMhxaafhqJXXd-VltdRLWEQHDgyRJa_3SGP_F9Bhj0xYWbbVUre-oFVMJZvOahKfVUNHY4LmPsjRH51UGkPLXcRNOWfDa2s1GoqBVDU2xi90DiMxkcAHCk5N3Z7LzVwH7R1d5OmQZ8KL7I1FLQ-aZXvsCTMPUfBqYYgem2lBRGkCntS-cE76ihV8g">
+</div>
+</div>
+</div>
+</section>
+<!-- Community Banner -->
+
+</main>
+<!-- Footer -->
+<footer class="bg-surface dark:bg-on-surface w-full pt-20 pb-10 border-t border-outline-variant/30">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-1">
+<h3 class="font-display-lg text-display-lg-mobile text-on-surface dark:text-inverse-on-surface mb-8">CAPIST</h3>
+<p class="text-on-secondary-fixed-variant dark:text-secondary-fixed-dim font-label-caps text-label-caps mb-4">ARCHITECTURAL PRECISION IN HEADWEAR.</p>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface mb-6">SHOP</h4>
+<ul class="space-y-4">
+<li class=""><a class="text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:text-primary transition-colors underline-offset-4 hover:underline font-label-caps text-label-caps" href="#">LUXURY</a></li>
+<li class=""><a class="text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:text-primary transition-colors underline-offset-4 hover:underline font-label-caps text-label-caps" href="#">STREETWEAR</a></li>
+<li class=""><a class="text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:text-primary transition-colors underline-offset-4 hover:underline font-label-caps text-label-caps" href="#">SPORTS</a></li>
+<li class=""><a class="text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:text-primary transition-colors underline-offset-4 hover:underline font-label-caps text-label-caps" href="#">EXCLUSIVES</a></li>
+<li class=""><a class="text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:text-primary transition-colors underline-offset-4 hover:underline font-label-caps text-label-caps" href="#">BEST SELLERS</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface mb-6">COMPANY</h4>
+<ul class="space-y-4">
+<li class=""><a class="text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:text-primary transition-colors underline-offset-4 hover:underline font-label-caps text-label-caps" href="#">ABOUT US</a></li>
+<li class=""><a class="text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:text-primary transition-colors underline-offset-4 hover:underline font-label-caps text-label-caps" href="#">CONTACT</a></li>
+<li class=""><a class="text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:text-primary transition-colors underline-offset-4 hover:underline font-label-caps text-label-caps" href="#">SHIPPING</a></li>
+<li class=""><a class="text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:text-primary transition-colors underline-offset-4 hover:underline font-label-caps text-label-caps" href="#">RETURNS</a></li>
+<li class=""><a class="text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:text-primary transition-colors underline-offset-4 hover:underline font-label-caps text-label-caps" href="#">TERMS</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface mb-6">STAY CONNECTED</h4>
+<div class="flex gap-4 mb-8">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">public</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">share</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">mail</span>
+</div>
+<p class="font-body-md text-body-md text-on-secondary-fixed-variant dark:text-secondary-fixed-dim">Subscribe for new drop alerts.</p>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop mt-20 pt-8 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-label-caps text-label-caps text-on-secondary-fixed-variant dark:text-secondary-fixed-dim">© 2024 CAPIST. ARCHITECTURAL PRECISION IN HEADWEAR.</p>
+<div class="flex gap-8">
+<a class="font-label-caps text-label-caps text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:text-on-surface" href="#">PRIVACY POLICY</a>
+<a class="font-label-caps text-label-caps text-on-secondary-fixed-variant dark:text-secondary-fixed-dim hover:text-on-surface" href="#">TERMS OF SERVICE</a>
+</div>
+</div>
+</footer>
+<script>
+        // Minimal interaction logic
+        document.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-sm');
+            } else {
+                header.classList.remove('shadow-sm');
+            }
+        });
+
+        // Hover effects for products
+        const products = document.querySelectorAll('.group');
+        products.forEach(p => {
+            p.addEventListener('mouseenter', () => {
+                const img = p.querySelector('img');
+                if (img) img.style.transform = 'scale(1.05)';
+            });
+            p.addEventListener('mouseleave', () => {
+                const img = p.querySelector('img');
+                if (img) img.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+
+
+
+
+</body></html>

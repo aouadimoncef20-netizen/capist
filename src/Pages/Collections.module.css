@@ -1,0 +1,25 @@
+.page {
+  padding: 96px 0;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--margin-desktop);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gutter);
+  margin-top: 64px;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .container {
+    padding: 0 var(--margin-mobile);
+  }
+}

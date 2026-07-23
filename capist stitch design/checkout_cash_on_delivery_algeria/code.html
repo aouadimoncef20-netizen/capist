@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cart &amp; Checkout | CAPIST</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Bodoni+Moda:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-container": "#1d1b1a",
+                      "surface-container-highest": "#e2e2e2",
+                      "background": "#f9f9f9",
+                      "surface-container-low": "#f3f3f3",
+                      "primary-container": "#1c1b1b",
+                      "on-tertiary-fixed": "#1d1b1a",
+                      "tertiary-fixed": "#e6e1df",
+                      "on-surface": "#1a1c1c",
+                      "surface-dim": "#dadada",
+                      "on-secondary-container": "#047240",
+                      "primary-fixed": "#e5e2e1",
+                      "on-error": "#ffffff",
+                      "on-tertiary-container": "#868381",
+                      "on-surface-variant": "#444748",
+                      "secondary-fixed": "#9af6b8",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-variant": "#e2e2e2",
+                      "on-background": "#1a1c1c",
+                      "primary": "#006d3d",
+                      "tertiary-fixed-dim": "#cac6c3",
+                      "on-primary": "#ffffff",
+                      "secondary": "#006d3d",
+                      "on-secondary-fixed-variant": "#00522d",
+                      "on-error-container": "#93000a",
+                      "on-primary-fixed-variant": "#474646",
+                      "inverse-primary": "#c8c6c5",
+                      "tertiary": "#000000",
+                      "surface": "#f9f9f9",
+                      "on-secondary-fixed": "#00210f",
+                      "surface-bright": "#f9f9f9",
+                      "outline-variant": "#c4c7c7",
+                      "on-primary-fixed": "#1c1b1b",
+                      "surface-container": "#eeeeee",
+                      "secondary-container": "#97f3b5",
+                      "on-tertiary-fixed-variant": "#484645",
+                      "error-container": "#ffdad6",
+                      "primary-fixed-dim": "#c8c6c5",
+                      "outline": "#747878",
+                      "inverse-on-surface": "#f1f1f1",
+                      "error": "#ba1a1a",
+                      "surface-container-high": "#e8e8e8",
+                      "inverse-surface": "#2f3131",
+                      "on-secondary": "#ffffff",
+                      "surface-tint": "#5f5e5e",
+                      "on-primary-container": "#858383",
+                      "secondary-fixed-dim": "#7ed99e",
+                      "on-tertiary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-desktop": "64px",
+                      "stack-xl": "120px",
+                      "gutter": "24px",
+                      "container-max": "1440px",
+                      "stack-md": "64px",
+                      "margin-mobile": "20px",
+                      "stack-sm": "32px"
+              },
+              "fontFamily": {
+                      "label-caps": ["Inter"],
+                      "headline-lg": ["Bodoni Moda"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "display-lg": ["Bodoni Moda"],
+                      "price-lg": ["Inter"],
+                      "headline-sm": ["Bodoni Moda"],
+                      "display-lg-mobile": ["Bodoni Moda"]
+              },
+              "fontSize": {
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                      "headline-lg": ["40px", {"lineHeight": "48px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "display-lg": ["80px", {"lineHeight": "90px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "price-lg": ["20px", {"lineHeight": "24px", "fontWeight": "500"}],
+                      "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                      "display-lg-mobile": ["48px", {"lineHeight": "54px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .item-hover-zoom:hover img {
+            transform: scale(1.05);
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #EAEAEA;
+        }
+        .step-active { color: #006d3d; border-bottom: 2px solid #006d3d; }
+        .step-inactive { color: #868381; }
+        input:focus { outline: none; border-color: #006d3d !important; ring: 0 !important; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-secondary selection:text-on-secondary">
+<!-- TopNavBar -->
+<nav class="bg-surface/80 backdrop-blur-xl sticky top-0 z-50 border-b border-outline-variant/30">
+<div class="flex justify-between items-center w-full px-margin-desktop py-6 max-w-container-max mx-auto">
+<a class="font-display-lg text-headline-sm tracking-tighter text-secondary" href="#">CAPIST</a>
+<div class="hidden md:flex items-center space-x-8">
+<a class="font-body-md text-body-md uppercase tracking-widest text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">Luxury</a>
+<a class="font-body-md text-body-md uppercase tracking-widest text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">Streetwear</a>
+<a class="font-body-md text-body-md uppercase tracking-widest text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">Sports</a>
+<a class="font-body-md text-body-md uppercase tracking-widest text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">University</a>
+<a class="font-body-md text-body-md uppercase tracking-widest text-on-surface-variant hover:text-secondary transition-colors duration-300" href="#">Best Sellers</a>
+</div>
+<div class="flex items-center space-x-6">
+<button class="hover:text-secondary transition-colors duration-300 active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+<button class="relative hover:text-secondary transition-colors duration-300 active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="shopping_bag" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+<span class="absolute -top-1 -right-1 bg-secondary text-on-secondary text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">2</span>
+</button>
+<button class="hover:text-secondary transition-colors duration-300 active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-md">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Shopping Bag + Forms -->
+<div class="lg:col-span-7">
+<!-- Header -->
+<header class="mb-stack-sm">
+<h1 class="font-headline-lg text-headline-lg mb-2">Shopping Bag</h1>
+<p class="font-body-md text-on-surface-variant uppercase tracking-widest text-xs">2 ITEMS IN YOUR CART</p>
+</header>
+<!-- Cart Items List -->
+<section class="space-y-10 mb-stack-md">
+<!-- Item 1 -->
+<div class="group relative grid grid-cols-1 md:grid-cols-[180px_1fr] gap-8 pb-10 border-b border-outline-variant/30">
+<div class="item-hover-zoom overflow-hidden aspect-[3/4] bg-surface-container-low">
+<img alt="Signature Cap" class="w-full h-full object-cover transition-transform duration-700 ease-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrVNe4K3hXv4L66kvqHKRNJzJB2wkIxK82ZbdXkW6sH8KuASP1YczM6zEwWx4PR_3ZYwdGFL2TvNobZ1x1pH5Y9NJq8pTpFpjZyy7v12JpFKRACa9HacEEzUytCuMPSaXjH8EJFPMcRCIptsqwk2jRbEi3l-4vdXdPxVJ0szji1Ug8u1Ni_QbB7MBFQUE0tXIxShnXyVd0SXCG-5cpkE1iuvRSa-752htqemd6_Dy_zh6IYkW60Nh-_g"/>
+</div>
+<div class="flex flex-col justify-between py-2">
+<div class="space-y-4">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-headline-sm text-headline-sm mb-1 uppercase">The Signature Cap</h2>
+<p class="font-body-md text-on-surface-variant text-sm tracking-wide">Color: Obsidian Black</p>
+<p class="font-body-md text-on-surface-variant text-sm tracking-wide">Size: One Size</p>
+</div>
+<span class="font-price-lg text-price-lg">$145.00</span>
+</div>
+<div class="flex items-center space-x-12 pt-2">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps mb-2 text-on-surface-variant">QUANTITY</span>
+<div class="flex items-center border border-outline-variant w-fit">
+<button class="px-3 py-1 hover:bg-surface-container transition-colors active:scale-90">-</button>
+<input class="w-12 text-center border-none focus:ring-0 bg-transparent font-body-md text-sm" readonly="" type="number" value="1"/>
+<button class="px-3 py-1 hover:bg-surface-container transition-colors active:scale-90">+</button>
+</div>
+</div>
+<div class="flex items-center space-x-2 text-secondary">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<span class="font-label-caps text-[10px] tracking-widest">IN STOCK</span>
+</div>
+</div>
+</div>
+<div class="flex items-center space-x-6 mt-6">
+<button class="font-label-caps text-label-caps underline underline-offset-4 hover:text-secondary transition-colors">SAVE FOR LATER</button>
+<button class="font-label-caps text-label-caps text-error underline underline-offset-4 hover:opacity-60 transition-opacity flex items-center">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="close">close</span>
+                                REMOVE
+                            </button>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="group relative grid grid-cols-1 md:grid-cols-[180px_1fr] gap-8 pb-10 border-b border-outline-variant/30">
+<div class="item-hover-zoom overflow-hidden aspect-[3/4] bg-surface-container-low">
+<img alt="Reflecta Eyewear" class="w-full h-full object-cover transition-transform duration-700 ease-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvr6I_jUTvXGgTuZIKevsE3XqH2r9GlpmabedWCBCvQ8039tQtnKL4QpeO8xryq64IdodJvC8UIyH11LOifN1TFAPYZMVsOf7saaaES5HWMLSFtDdWBSu5BSne0VqF3oBHRhLOiYmOWF0Hqcq7eQe9UHKpMONRpa3VFWtq_BWsfBfDbRGXQVY1K0ZhZ4zS1NY2bS_eHZEyt2fexkqhBPD3FSeQixf7_8-pmS-t1NaVUXBBnJvRrqIhew"/>
+</div>
+<div class="flex flex-col justify-between py-2">
+<div class="space-y-4">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-headline-sm text-headline-sm mb-1 uppercase">Reflecta 01</h2>
+<p class="font-body-md text-on-surface-variant text-sm tracking-wide">Color: Steel Iridescent</p>
+<p class="font-body-md text-on-surface-variant text-sm tracking-wide">Size: L</p>
+</div>
+<span class="font-price-lg text-price-lg">$290.00</span>
+</div>
+<div class="flex items-center space-x-12 pt-2">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps mb-2 text-on-surface-variant">QUANTITY</span>
+<div class="flex items-center border border-outline-variant w-fit">
+<button class="px-3 py-1 hover:bg-surface-container transition-colors active:scale-90">-</button>
+<input class="w-12 text-center border-none focus:ring-0 bg-transparent font-body-md text-sm" readonly="" type="number" value="1"/>
+<button class="px-3 py-1 hover:bg-surface-container transition-colors active:scale-90">+</button>
+</div>
+</div>
+<div class="flex items-center space-x-2 text-secondary">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<span class="font-label-caps text-[10px] tracking-widest">IN STOCK</span>
+</div>
+</div>
+</div>
+<div class="flex items-center space-x-6 mt-6">
+<button class="font-label-caps text-label-caps underline underline-offset-4 hover:text-secondary transition-colors">SAVE FOR LATER</button>
+<button class="font-label-caps text-label-caps text-error underline underline-offset-4 hover:opacity-60 transition-opacity flex items-center">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="close">close</span>
+                                REMOVE
+                            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Checkout Flow Container -->
+<div class="space-y-stack-sm pt-stack-sm border-t border-outline-variant/30">
+<!-- Progress Indicator -->
+<nav class="flex items-center space-x-8 mb-10 border-b border-outline-variant/20 pb-4">
+<div class="step-active pb-4 font-label-caps text-label-caps flex items-center gap-2">
+<span class="w-5 h-5 rounded-full border border-secondary flex items-center justify-center text-[10px]">1</span>
+                        SHIPPING
+                    </div>
+<div class="step-inactive pb-4 font-label-caps text-label-caps flex items-center gap-2">
+<span class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px]">2</span>
+                        BILLING
+                    </div>
+<div class="step-inactive pb-4 font-label-caps text-label-caps flex items-center gap-2">
+<span class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center text-[10px]">3</span>
+                        PAYMENT
+                    </div>
+</nav>
+<!-- Shipping Information Section -->
+<section class="animate-in fade-in duration-700" id="shipping-section">
+<h2 class="font-headline-sm text-headline-sm mb-8 uppercase tracking-tight text-secondary">Shipping Information</h2>
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col">
+<label class="font-label-caps text-label-caps mb-2 text-on-surface-variant">FIRST NAME</label>
+<input class="border-outline-variant border-x-0 border-t-0 border-b p-3 bg-transparent placeholder:text-outline-variant/50 focus:border-secondary transition-all" placeholder="Enter first name" type="text"/>
+</div>
+<div class="flex flex-col">
+<label class="font-label-caps text-label-caps mb-2 text-on-surface-variant">LAST NAME</label>
+<input class="border-outline-variant border-x-0 border-t-0 border-b p-3 bg-transparent placeholder:text-outline-variant/50 focus:border-secondary transition-all" placeholder="Enter last name" type="text"/>
+</div>
+</div>
+<div class="flex flex-col">
+<label class="font-label-caps text-label-caps mb-2 text-on-surface-variant">ADDRESS LINE 1</label>
+<input class="border-outline-variant border-x-0 border-t-0 border-b p-3 bg-transparent placeholder:text-outline-variant/50 focus:border-secondary transition-all" placeholder="Street address, P.O. box, company name" type="text"/>
+</div>
+<div class="flex flex-col">
+<label class="font-label-caps text-label-caps mb-2 text-on-surface-variant">ADDRESS LINE 2 (OPTIONAL)</label>
+<input class="border-outline-variant border-x-0 border-t-0 border-b p-3 bg-transparent placeholder:text-outline-variant/50 focus:border-secondary transition-all" placeholder="Apartment, suite, unit, building, floor" type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="flex flex-col">
+<label class="font-label-caps text-label-caps mb-2 text-on-surface-variant">CITY</label>
+<input class="border-outline-variant border-x-0 border-t-0 border-b p-3 bg-transparent placeholder:text-outline-variant/50 focus:border-secondary transition-all" placeholder="City" type="text"/>
+</div>
+<div class="flex flex-col">
+<label class="font-label-caps text-label-caps mb-2 text-on-surface-variant">COUNTRY</label>
+<select class="border-outline-variant border-x-0 border-t-0 border-b p-3 bg-transparent focus:border-secondary transition-all appearance-none cursor-pointer"><option selected="">Algeria</option></select>
+</div>
+<div class="flex flex-col"><label class="font-label-caps text-label-caps mb-2 text-on-surface-variant">WILAYA</label>
+<input class="border-outline-variant border-x-0 border-t-0 border-b p-3 bg-transparent placeholder:text-outline-variant/50 focus:border-secondary transition-all" placeholder="Enter your Wilaya" type="text"/></div>
+</div>
+</form>
+</section>
+<!-- Payment Methods Section -->
+<section class="mt-stack-md pt-stack-md border-t border-outline-variant/20" id="payment-section">
+<h2 class="font-headline-sm text-headline-sm mb-8 uppercase tracking-tight text-secondary">Payment Methods</h2>
+<div class="flex items-center gap-4 mb-8 p-4 border border-secondary bg-secondary/5 rounded-sm">
+<span class="material-symbols-outlined text-secondary">payments</span>
+<div>
+<p class="font-label-caps text-label-caps text-secondary">Paiement à la livraison (Cash on Delivery)</p>
+<p class="text-xs text-on-surface-variant mt-1">Pay in cash upon receiving your order.</p>
+</div>
+</div>
+</section>
+<div class="pt-12">
+<button class="w-full bg-secondary text-on-secondary py-5 rounded-sm font-label-caps text-label-caps tracking-[0.2em] hover:opacity-90 transition-all active:scale-[0.98] duration-200 shadow-sm flex items-center justify-center gap-4">
+                        COMPLETE PURCHASE
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<p class="mt-4 text-on-surface-variant text-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+                        Your transaction is encrypted and secured by 256-bit SSL technology.
+                    </p>
+</div>
+</div>
+</div>
+<!-- Right Column: Sticky Order Summary -->
+<aside class="lg:col-span-5">
+<div class="sticky top-28 bg-surface-container-low p-8 border border-outline-variant/30 rounded-sm space-y-8">
+<h3 class="font-label-caps text-label-caps mb-8 tracking-[0.2em] text-secondary border-b border-outline-variant/30 pb-4">ORDER SUMMARY</h3>
+<!-- Summary Totals -->
+<div class="space-y-4 mb-8">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-on-surface-variant">Subtotal</span>
+<span class="font-body-md font-medium">$435.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-on-surface-variant">Shipping (Express)</span>
+<span class="font-body-md font-medium">$25.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-on-surface-variant">Estimated Tax</span>
+<span class="font-body-md font-medium">$42.00</span>
+</div>
+<div class="pt-6 border-t border-secondary/20 flex justify-between items-center">
+<span class="font-label-caps text-sm tracking-widest text-secondary uppercase">Total</span>
+<span class="font-price-lg text-2xl font-bold text-secondary">$502.00</span>
+</div>
+</div>
+<!-- Promo Code -->
+<div class="mt-12 border-t border-outline-variant/50 pt-8">
+<button class="flex justify-between items-center w-full font-label-caps text-label-caps group hover:text-secondary transition-colors" id="promo-toggle">
+<span>ADD PROMO CODE</span>
+<span class="material-symbols-outlined transition-transform duration-300" data-icon="expand_more" id="promo-icon">expand_more</span>
+</button>
+<div class="hidden mt-4 overflow-hidden" id="promo-input">
+<div class="flex gap-2">
+<input class="flex-grow bg-transparent border-b border-outline-variant focus:border-secondary focus:ring-0 text-sm py-2 uppercase font-body-md" placeholder="ENTER CODE" type="text"/>
+<button class="font-label-caps text-[10px] tracking-widest px-4 border border-secondary text-secondary hover:bg-secondary hover:text-on-secondary transition-colors">APPLY</button>
+</div>
+</div>
+</div>
+<!-- Support & Trust -->
+<div class="mt-12 space-y-4 pt-8 border-t border-outline-variant/50">
+<div class="flex items-center text-on-surface-variant space-x-3">
+<span class="material-symbols-outlined text-sm" data-icon="lock">lock</span>
+<span class="text-[10px] font-label-caps uppercase">Secure Checkout Guaranteed</span>
+</div>
+<div class="flex items-center text-on-surface-variant space-x-3">
+<span class="material-symbols-outlined text-sm" data-icon="local_shipping">local_shipping</span>
+<span class="text-[10px] font-label-caps uppercase">Complimentary Eco-Packaging</span>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface border-t border-outline-variant/30 mt-stack-xl">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop py-stack-md max-w-container-max mx-auto">
+<div class="space-y-6">
+<a class="font-display-lg text-headline-sm text-secondary" href="#">CAPIST</a>
+<p class="font-body-md text-sm text-on-surface-variant leading-relaxed">Defining the horizon of luxury streetwear through precision and minimalism.</p>
+</div>
+<div class="space-y-4">
+<h4 class="font-label-caps text-label-caps text-secondary tracking-widest">COMPANY</h4>
+<ul class="space-y-2">
+<li><a class="font-body-md text-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">About Us</a></li>
+<li><a class="font-body-md text-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Sustainability</a></li>
+<li><a class="font-body-md text-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Journal</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="font-label-caps text-label-caps text-secondary tracking-widest">SUPPORT</h4>
+<ul class="space-y-2">
+<li><a class="font-body-md text-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Shipping &amp; Returns</a></li>
+<li><a class="font-body-md text-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Size Guide</a></li>
+<li><a class="font-body-md text-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Contact</a></li>
+</ul>
+</div>
+<div class="space-y-6">
+<h4 class="font-label-caps text-label-caps text-secondary tracking-widest">NEWSLETTER</h4>
+<div class="flex border-b border-outline-variant/50 pb-2">
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full font-body-md" placeholder="Email Address" type="email"/>
+<button class="material-symbols-outlined text-secondary" data-icon="arrow_forward">arrow_forward</button>
+</div>
+</div>
+</div>
+<div class="px-margin-desktop py-8 border-t border-outline-variant/20 max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="font-body-md text-[10px] text-on-surface-variant tracking-[0.2em]">© 2024 CAPIST. ALL RIGHTS RESERVED.</span>
+<div class="flex space-x-8">
+<a class="font-body-md text-[10px] text-on-surface-variant tracking-[0.2em] hover:text-secondary transition-colors" href="#">TERMS OF SERVICE</a>
+<a class="font-body-md text-[10px] text-on-surface-variant tracking-[0.2em] hover:text-secondary transition-colors" href="#">PRIVACY POLICY</a>
+</div>
+</div>
+</footer>
+<script>
+    // Promo toggle interaction
+    const promoToggle = document.getElementById('promo-toggle');
+    const promoInput = document.getElementById('promo-input');
+    const promoIcon = document.getElementById('promo-icon');
+
+    promoToggle.addEventListener('click', () => {
+        const isHidden = promoInput.classList.contains('hidden');
+        if (isHidden) {
+            promoInput.classList.remove('hidden');
+            promoIcon.style.transform = 'rotate(180deg)';
+        } else {
+            promoInput.classList.add('hidden');
+            promoIcon.style.transform = 'rotate(0deg)';
+        }
+    });
+
+    // Quantity selector simulation
+    document.querySelectorAll('button').forEach(btn => {
+        if(btn.innerText === '+' || btn.innerText === '-') {
+            btn.addEventListener('click', function() {
+                const input = this.parentElement.querySelector('input');
+                let val = parseInt(input.value);
+                if(this.innerText === '+') val++;
+                if(this.innerText === '-' && val > 1) val--;
+                input.value = val;
+            });
+        }
+    });
+
+    // Micro-interaction for input fields
+    document.querySelectorAll('input').forEach(input => {
+        input.addEventListener('focus', function() {
+            const label = this.parentElement.querySelector('label');
+            if (label) label.style.color = '#006d3d';
+        });
+        input.addEventListener('blur', function() {
+            const label = this.parentElement.querySelector('label');
+            if (label) label.style.color = '';
+        });
+    });
+</script>
+</body></html>

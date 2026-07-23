@@ -1,0 +1,24 @@
+.wrapper { position: relative; width: 100%; }
+
+.input {
+  width: 100%;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  padding: 14px 16px 14px 44px;
+  font-size: var(--fs-body-md);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color var(--transition-fast);
+  border-radius: 0;
+}
+.input:focus { border-color: var(--color-green); }
+
+.icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 18px;
+  pointer-events: none;
+}

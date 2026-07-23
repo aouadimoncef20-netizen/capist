@@ -1,0 +1,529 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>CAPIST | Discover Your Perfect Cap</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400..900;1,400..900&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet">
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#b64c62",
+                        "on-primary-fixed-variant": "#005323",
+                        "on-tertiary-container": "#fff1f1",
+                        "surface-bright": "#f9f9ff",
+                        "surface-tint": "#006d30",
+                        "secondary-fixed-dim": "#bdc7d9",
+                        "primary-container": "#15803d",
+                        "on-secondary-container": "#596373",
+                        "outline-variant": "#becabc",
+                        "on-secondary-fixed": "#121c2a",
+                        "on-secondary-fixed-variant": "#3d4756",
+                        "on-tertiary-fixed-variant": "#81233b",
+                        "background": "#f9f9ff",
+                        "surface-variant": "#dce2f3",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e2e8f8",
+                        "on-surface-variant": "#3f493f",
+                        "tertiary-fixed-dim": "#ffb2bd",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#dce2f3",
+                        "on-surface": "#151c27",
+                        "primary": "#00652c",
+                        "inverse-primary": "#79db8d",
+                        "primary-fixed": "#95f8a7",
+                        "surface": "#f9f9ff",
+                        "surface-dim": "#d3daea",
+                        "secondary": "#555f6f",
+                        "on-background": "#151c27",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#00210a",
+                        "tertiary": "#97344a",
+                        "secondary-fixed": "#d9e3f6",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#e7eefe",
+                        "inverse-surface": "#2a313d",
+                        "primary-fixed-dim": "#79db8d",
+                        "inverse-on-surface": "#ebf1ff",
+                        "on-tertiary-fixed": "#400013",
+                        "error-container": "#ffdad6",
+                        "outline": "#6f7a6e",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#d6e0f3",
+                        "tertiary-fixed": "#ffd9dd",
+                        "surface-container-low": "#f0f3ff",
+                        "on-primary-container": "#d3ffd5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "container-max": "1280px",
+                        "margin-mobile": "20px",
+                        "gutter": "32px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Plus Jakarta Sans"],
+                        "headline-sm": ["Bodoni Moda"],
+                        "headline-md": ["Bodoni Moda"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Bodoni Moda"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-lg-mobile": ["Bodoni Moda"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .active-filter {
+            background-color: #15803d !important;
+            color: #ffffff !important;
+        }
+        .product-card:hover .wishlist-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #15803d;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface selection:bg-primary selection:text-white font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface-container-lowest dark:bg-surface-container-lowest border-b border-outline-variant dark:border-outline-variant flat no shadows h-20 transition-all duration-300" id="main-nav">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-full">
+<!-- Brand -->
+<a class="text-headline-md font-headline-md tracking-tighter text-on-surface dark:text-on-surface" href="#">CAPIST</a>
+<!-- Navigation Links -->
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-label-caps font-label-caps text-primary dark:text-primary border-b-2 border-primary pb-1 active:opacity-80 transition-opacity" href="#">Collections</a>
+<a class="text-label-caps font-label-caps text-on-surface dark:text-on-surface hover:text-primary transition-colors duration-300" href="#">Archives</a>
+<a class="text-label-caps font-label-caps text-on-surface dark:text-on-surface hover:text-primary transition-colors duration-300" href="#">Bespoke</a>
+<a class="text-label-caps font-label-caps text-on-surface dark:text-on-surface hover:text-primary transition-colors duration-300" href="#">Editorial</a>
+<a class="text-label-caps font-label-caps text-on-surface dark:text-on-surface hover:text-primary transition-colors duration-300" href="#">Heritage</a>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center space-x-6">
+<button class="text-label-caps font-label-caps text-on-surface hover:text-primary transition-colors duration-300">Account</button>
+<button class="relative">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="absolute -top-2 -right-2 bg-primary text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">2</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="py-24 bg-surface-container-lowest"><div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center">
+<div class="text-left py-12">
+<nav class="flex justify-start items-center space-x-2 text-label-caps font-label-caps text-secondary mb-6">
+<a class="hover:text-primary" href="#">Home</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-primary" href="#">Shop</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary">Collection</span>
+</nav>
+<h1 class="text-display-lg-mobile md:text-display-lg font-display-lg text-on-surface mb-6 tracking-tighter">Discover Your Perfect Cap</h1>
+<p class="max-w-xl text-body-lg font-body-lg text-on-surface-variant opacity-80 mb-8">
+                Explore premium luxury, streetwear, sports, and university collections carefully curated for every style. Crafted with architectural precision and a less-but-better philosophy.
+            </p>
+<button class="bg-on-surface text-white px-8 py-4 text-label-caps font-label-caps hover:bg-primary transition-colors duration-300">Explore Collections</button>
+</div>
+<div class="relative aspect-[4/5] lg:aspect-square overflow-hidden rounded-lg shadow-2xl">
+<img alt="High-end luxury fashion editorial for a premium cap brand" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC94ncVhdI1CZHlXbsmOv_1UyWgygaS7SBprdvHq9FeCk7Y7xdti8NKoHGPNPz_PWBpKWBE7uKiLBGxkbv8xOXwUK0bQJf3KdJSljwQjEWWBA-azOyba1HsvGMtOmgf0z1fD5kpcooh2ywg39R0lDDQze12UkLPUshco2uB4sg7w1hTLZJT27Hk5HpSyAIS0LOjCw07r7V6D7z0w7cvmsqSMLgR9q1CJvOxE3qScxl6XDdLDdFwIblrUw">
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+</div>
+</div>
+</div></section>
+<!-- Product Exploration Section -->
+<section class="max-w-container-max mx-auto px-margin-desktop py-16">
+<!-- Sticky Filter Bar -->
+<div class="sticky top-20 z-40 bg-surface-container-lowest/95 backdrop-blur-md py-6 mb-12 border-b border-outline-variant flex items-center overflow-x-auto no-scrollbar space-x-4">
+<button class="whitespace-nowrap px-6 py-2 rounded-full text-label-caps font-label-caps border border-primary active-filter transition-all">All</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full text-label-caps font-label-caps border border-outline-variant text-on-surface hover:border-primary hover:text-primary transition-all">Luxury</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full text-label-caps font-label-caps border border-outline-variant text-on-surface hover:border-primary hover:text-primary transition-all">Streetwear</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full text-label-caps font-label-caps border border-outline-variant text-on-surface hover:border-primary hover:text-primary transition-all">Sports</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full text-label-caps font-label-caps border border-outline-variant text-on-surface hover:border-primary hover:text-primary transition-all">University</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full text-label-caps font-label-caps border border-outline-variant text-on-surface hover:border-primary hover:text-primary transition-all">Best Sellers</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full text-label-caps font-label-caps border border-outline-variant text-on-surface hover:border-primary hover:text-primary transition-all">New Arrivals</button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full text-label-caps font-label-caps border border-outline-variant text-on-surface hover:border-primary hover:text-primary transition-all">Limited Edition</button>
+</div>
+<div class="flex flex-col lg:flex-row gap-gutter">
+<!-- Sidebar Filters -->
+
+<!-- Product Grid Area -->
+<div class="flex-grow">
+<!-- Stats & Sorting -->
+<div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
+<div class="flex items-center space-x-4 w-full md:w-auto">
+<div class="relative w-full md:w-80">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant pl-10 pr-4 py-2 text-body-md focus:ring-1 focus:ring-primary focus:border-primary outline-none" placeholder="Search collection..." type="text">
+</div>
+</div>
+<div class="flex items-center space-x-2 w-full md:w-auto justify-end">
+<span class="text-label-caps text-on-surface-variant">Sort by:</span>
+<select class="bg-transparent border-none text-label-caps font-label-caps text-primary focus:ring-0 cursor-pointer">
+<option>Featured</option>
+<option>Best Selling</option>
+<option>Newest</option>
+<option>Price: Low to High</option>
+<option>Price: High to Low</option>
+</select>
+</div>
+</div>
+<!-- Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-x-gutter gap-y-12"><!-- Row 1: Luxury & Heritage -->
+<div class="product-card group relative flex flex-col">
+<div class="relative aspect-[3/4] mb-4 bg-surface-container-low overflow-hidden transition-transform duration-500 ease-out">
+<img alt="Heritage Wool Cap" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM2SgbdG_mxBPYh0dKh0os56PL-2cGb9748Y0vnSzUwhznsLI6uiRgxbyqFW_WcyhMhDvDFdmSawMkKFPvTMYKZ5CtuTK-MhGNn11V-19xOxxKjtX-ROiWTS2kLu1VTL4losiebwBGsX6LJ6wAYTlOhZ2r91sF8Pe9gsWwddstrZcKPpuk7cfi8ij3HbkOUeRL-fMyeUrRt4ZeIJ2mhvV8st_0Ge_PN3oikVbEb_FQFY3Hr-_M1cpmwQ">
+<div class="absolute top-4 left-4"><span class="bg-primary text-white text-[10px] font-label-caps px-2 py-1 uppercase tracking-widest">New</span></div>
+<button class="wishlist-btn absolute top-4 right-4 bg-white/80 backdrop-blur w-10 h-10 flex items-center justify-center opacity-0 transform translate-y-2 transition-all duration-300 hover:text-primary"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+<button class="absolute bottom-0 left-0 w-full py-4 bg-on-surface text-white text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300">Quick Add</button>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-caps text-secondary-fixed-variant mb-1">CAPIST Editorial</p>
+<h4 class="text-body-md font-semibold text-on-surface mb-2">Heritage Wool Cap</h4>
+</div>
+<span class="text-body-md font-bold text-primary">$185</span>
+</div>
+</div>
+<div class="product-card group relative flex flex-col">
+<div class="relative aspect-[3/4] mb-4 bg-surface-container-low overflow-hidden transition-transform duration-500 ease-out">
+<img alt="Tweed Archival Cap" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYriKX8sOFkS-KBt53pZbrCrfClsK-hU6tOcJHIsFucE1jFDhhvZN-3vIMHoCTdw_vZgDSgG_dqSfNOGNXO5_KT7fn6xCnqTLrEEHDiKfal6Nm21Fy6iauUWEnpKf1aXaa-E4bP8Mwg9Q78tq79Azg0GYbTl6_GnjCfrvlKRwT-pn-OZYJkjjoliocTe25-h6ZIG-blbZKv4NfmIX8ctkC3dxzH6sUIvvtEYE1-LP0cBwIpor3HTEnuw">
+<div class="absolute top-4 left-4"><span class="bg-on-secondary-fixed-variant text-white text-[10px] font-label-caps px-2 py-1 uppercase tracking-widest">Best Seller</span></div>
+<button class="wishlist-btn absolute top-4 right-4 bg-white/80 backdrop-blur w-10 h-10 flex items-center justify-center opacity-0 transform translate-y-2 transition-all duration-300 hover:text-primary"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+<button class="absolute bottom-0 left-0 w-full py-4 bg-on-surface text-white text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300">Quick Add</button>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-caps text-secondary-fixed-variant mb-1">CAPIST Heritage</p>
+<h4 class="text-body-md font-semibold text-on-surface mb-2">Tweed Archival Cap</h4>
+</div>
+<span class="text-body-md font-bold text-primary">$210</span>
+</div>
+</div>
+<div class="product-card group relative flex flex-col">
+<div class="relative aspect-[3/4] mb-4 bg-surface-container-low overflow-hidden transition-transform duration-500 ease-out">
+<img alt="Minimalist Luxury Cap" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AP1WRLtOi7PRpPjE8rYlKjk62A0uUJ7HyVd2F3r2w4yUiVjFRSE31ZPx-54fTL7pr5UBYweuIUBzgMMvExVtLdFRGuqs9tm5g32bsDbkSgTGca-Qk9IIhVz22bqgg_YwrQKah12HsMS9OT5S1Ve15aJF3mFTMfl19oFgCuzxZUPYCUBIo589llaKKLtcGS7nt7htRIfJISFYD-D6AOs_GhjZ-jVCXJi18Lb8VaXO_XF7ToeWfj3_U4V9pt11t_so">
+<button class="wishlist-btn absolute top-4 right-4 bg-white/80 backdrop-blur w-10 h-10 flex items-center justify-center opacity-0 transform translate-y-2 transition-all duration-300 hover:text-primary"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+<button class="absolute bottom-0 left-0 w-full py-4 bg-on-surface text-white text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300">Quick Add</button>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-caps text-secondary-fixed-variant mb-1">CAPIST Luxury</p>
+<h4 class="text-body-md font-semibold text-on-surface mb-2">Architectural Minimalist</h4>
+</div>
+<span class="text-body-md font-bold text-primary">$320</span>
+</div>
+</div>
+<div class="product-card group relative flex flex-col">
+<div class="relative aspect-[3/4] mb-4 bg-surface-container-low overflow-hidden transition-transform duration-500 ease-out">
+<img alt="Collegiate Heritage" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AP1WRLuoTaLF53D_-dQ8sBhqUC8DlUwPr_MlHt9MDVy6zaTdjisyho2ewqCSBXtYsNNZXLNIKezp5ZXmD_usQ9vZC8tKvsOS-T8ujqcym0WfYKTQo4Y-oK114hYfEAyqufSfaZO_zNi6WmxX_Iu8TVL8hX77NDeoCUpmqXTMmnwtZZej3HDAVQ3HaPTGAJv5z6DS_ODDynH45IwykSeqQ0RGNYo4FcAtCUux-TW88C9U-GHn_t10MrbJB1ToRWo">
+<button class="wishlist-btn absolute top-4 right-4 bg-white/80 backdrop-blur w-10 h-10 flex items-center justify-center opacity-0 transform translate-y-2 transition-all duration-300 hover:text-primary"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+<button class="absolute bottom-0 left-0 w-full py-4 bg-on-surface text-white text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300">Quick Add</button>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-caps text-secondary-fixed-variant mb-1">CAPIST University</p>
+<h4 class="text-body-md font-semibold text-on-surface mb-2">Ivy League Structured</h4>
+</div>
+<span class="text-body-md font-bold text-primary">$145</span>
+</div>
+</div>
+<!-- Row 2: Sports & Performance -->
+<div class="product-card group relative flex flex-col cursor-pointer">
+<div class="relative aspect-[3/4] mb-4 bg-surface-container-low overflow-hidden transition-transform duration-500 ease-out">
+<img alt="Aero-Light Runner" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDooIduIL3RrKp-UE3NOdn2XJ-kDXZaqjmBirl8jBSkRkZPHMy2cKU5-s8ZYRnh8sZgOjLmEnl3hsIZBxYLxFK45LOIQqIJ9wCY3x8dqHnYcHGhRdN1gYFAz18_PNpXIkraiLy2cPNjboQqGuZXyrCd2b_qo1PD4i9daYLLl0L1wJpY8rQMAMXn5tA8_Fpvb_jd-oB8KYPmrmp67IumfXnCvIQCjGh2bRh-mMdsa0qOEKqoeHPj5nLjtw">
+<button class="wishlist-btn absolute top-4 right-4 bg-white/80 backdrop-blur w-10 h-10 flex items-center justify-center opacity-0 transform translate-y-2 transition-all duration-300 hover:text-primary"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+<button class="absolute bottom-0 left-0 w-full py-4 bg-on-surface text-white text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300">Quick Add</button>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-caps text-secondary-fixed-variant mb-1">CAPIST Performance</p>
+<h4 class="text-body-md font-semibold text-on-surface mb-2">Aero-Light Runner</h4>
+</div>
+<span class="text-body-md font-bold text-primary">$95</span>
+</div>
+</div>
+<div class="product-card group relative flex flex-col">
+<div class="relative aspect-[3/4] mb-4 bg-surface-container-low overflow-hidden transition-transform duration-500 ease-out">
+<img alt="Technical Sports Cap" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AP1WRLsg9ant_9gl4qypZwmFTeVzH1_d0Y68T9tezwU05ZZEzDDX0bfQc_u7-stJb4DZD_yDeAbugytU2SZAVrMj2o_ZnzbG-6hfqOov-AtREuRv61evHHHCOoB8-EBC7bKJxGY1m02_iYXIk8d4zRtZ5DhcUQs-GKw71dBm_xwKFoQ5XZbBxL8jZmVB9dEcPykcYuS5PpTrEMyvPHVlDlyEMG3vqE0eviy0oEJEC9GBvhZ4pS5B-ms7FwW1IZWW">
+<div class="absolute top-4 left-4"><span class="bg-primary text-white text-[10px] font-label-caps px-2 py-1 uppercase tracking-widest">Pro</span></div>
+<button class="wishlist-btn absolute top-4 right-4 bg-white/80 backdrop-blur w-10 h-10 flex items-center justify-center opacity-0 transform translate-y-2 transition-all duration-300 hover:text-primary"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+<button class="absolute bottom-0 left-0 w-full py-4 bg-on-surface text-white text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300">Quick Add</button>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-caps text-secondary-fixed-variant mb-1">CAPIST Sports</p>
+<h4 class="text-body-md font-semibold text-on-surface mb-2">Stadium Tech Runner</h4>
+</div>
+<span class="text-body-md font-bold text-primary">$110</span>
+</div>
+</div>
+<div class="product-card group relative flex flex-col cursor-pointer">
+<div class="relative aspect-[3/4] mb-4 bg-surface-container-low overflow-hidden transition-transform duration-500 ease-out">
+<img alt="Streetwear Neon" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AP1WRLsKpabn83NjHMJhdkbYfnEtgZOGzT-y5LcD2ubfaTCRkAAbc-b_haCnbK26XDCf1HgWU-vY5MXXbSrZfO8Z1LiUUAV-67AWchX1-VILwA9qVNOCo_OG3T4XFAVHCdAtHZB7T4Xkvxme2sn9S8Gf__M9QuNfOkw_pY-1MP1h2FSJEybrIiK0MiOXI23EhcC8_3dtF8mdxqpwIuh9w3OosGYZVvmdx-p9mUEJuSC8CPs6BTeiEA5ysoO5NbHD">
+<div class="absolute top-4 left-4"><span class="bg-tertiary text-white text-[10px] font-label-caps px-2 py-1 uppercase tracking-widest">Limited</span></div>
+<button class="wishlist-btn absolute top-4 right-4 bg-white/80 backdrop-blur w-10 h-10 flex items-center justify-center opacity-0 transform translate-y-2 transition-all duration-300 hover:text-primary"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+<button class="absolute bottom-0 left-0 w-full py-4 bg-on-surface text-white text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300">Quick Add</button>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-caps text-secondary-fixed-variant mb-1">CAPIST Street</p>
+<h4 class="text-body-md font-semibold text-on-surface mb-2">Tokyo Night Streetwear</h4>
+</div>
+<span class="text-body-md font-bold text-primary">$165</span>
+</div>
+</div>
+<div class="product-card group relative flex flex-col">
+<div class="relative aspect-[3/4] mb-4 bg-surface-container-low overflow-hidden transition-transform duration-500 ease-out">
+<img alt="Classic Dad Cap" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM2SgbdG_mxBPYh0dKh0os56PL-2cGb9748Y0vnSzUwhznsLI6uiRgxbyqFW_WcyhMhDvDFdmSawMkKFPvTMYKZ5CtuTK-MhGNn11V-19xOxxKjtX-ROiWTS2kLu1VTL4losiebwBGsX6LJ6wAYTlOhZ2r91sF8Pe9gsWwddstrZcKPpuk7cfi8ij3HbkOUeRL-fMyeUrRt4ZeIJ2mhvV8st_0Ge_PN3oikVbEb_FQFY3Hr-_M1cpmwQ">
+<button class="wishlist-btn absolute top-4 right-4 bg-white/80 backdrop-blur w-10 h-10 flex items-center justify-center opacity-0 transform translate-y-2 transition-all duration-300 hover:text-primary"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+<button class="absolute bottom-0 left-0 w-full py-4 bg-on-surface text-white text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300">Quick Add</button>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-caps text-secondary-fixed-variant mb-1">CAPIST Essentials</p>
+<h4 class="text-body-md font-semibold text-on-surface mb-2">Classic Twill Dad Cap</h4>
+</div>
+<span class="text-body-md font-bold text-primary">$75</span>
+</div>
+</div>
+<!-- Row 3: Mixed Collections -->
+<div class="product-card group relative flex flex-col">
+<div class="relative aspect-[3/4] mb-4 bg-surface-container-low overflow-hidden transition-transform duration-500 ease-out">
+<img alt="Linen Summer Cap" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDooIduIL3RrKp-UE3NOdn2XJ-kDXZaqjmBirl8jBSkRkZPHMy2cKU5-s8ZYRnh8sZgOjLmEnl3hsIZBxYLxFK45LOIQqIJ9wCY3x8dqHnYcHGhRdN1gYFAz18_PNpXIkraiLy2cPNjboQqGuZXyrCd2b_qo1PD4i9daYLLl0L1wJpY8rQMAMXn5tA8_Fpvb_jd-oB8KYPmrmp67IumfXnCvIQCjGh2bRh-mMdsa0qOEKqoeHPj5nLjtw">
+<button class="wishlist-btn absolute top-4 right-4 bg-white/80 backdrop-blur w-10 h-10 flex items-center justify-center opacity-0 transform translate-y-2 transition-all duration-300 hover:text-primary"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+<button class="absolute bottom-0 left-0 w-full py-4 bg-on-surface text-white text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300">Quick Add</button>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-caps text-secondary-fixed-variant mb-1">CAPIST Editorial</p>
+<h4 class="text-body-md font-semibold text-on-surface mb-2">Breathable Linen Cap</h4>
+</div>
+<span class="text-body-md font-bold text-primary">$125</span>
+</div>
+</div>
+<div class="product-card group relative flex flex-col">
+<div class="relative aspect-[3/4] mb-4 bg-surface-container-low overflow-hidden transition-transform duration-500 ease-out">
+<img alt="Velvet Evening Cap" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYriKX8sOFkS-KBt53pZbrCrfClsK-hU6tOcJHIsFucE1jFDhhvZN-3vIMHoCTdw_vZgDSgG_dqSfNOGNXO5_KT7fn6xCnqTLrEEHDiKfal6Nm21Fy6iauUWEnpKf1aXaa-E4bP8Mwg9Q78tq79Azg0GYbTl6_GnjCfrvlKRwT-pn-OZYJkjjoliocTe25-h6ZIG-blbZKv4NfmIX8ctkC3dxzH6sUIvvtEYE1-LP0cBwIpor3HTEnuw">
+<button class="wishlist-btn absolute top-4 right-4 bg-white/80 backdrop-blur w-10 h-10 flex items-center justify-center opacity-0 transform translate-y-2 transition-all duration-300 hover:text-primary"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+<button class="absolute bottom-0 left-0 w-full py-4 bg-on-surface text-white text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300">Quick Add</button>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-caps text-secondary-fixed-variant mb-1">CAPIST Luxury</p>
+<h4 class="text-body-md font-semibold text-on-surface mb-2">Midnight Velvet Cap</h4>
+</div>
+<span class="text-body-md font-bold text-primary">$280</span>
+</div>
+</div>
+<div class="product-card group relative flex flex-col">
+<div class="relative aspect-[3/4] mb-4 bg-surface-container-low overflow-hidden transition-transform duration-500 ease-out">
+<img alt="Canvas Trucker" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM2SgbdG_mxBPYh0dKh0os56PL-2cGb9748Y0vnSzUwhznsLI6uiRgxbyqFW_WcyhMhDvDFdmSawMkKFPvTMYKZ5CtuTK-MhGNn11V-19xOxxKjtX-ROiWTS2kLu1VTL4losiebwBGsX6LJ6wAYTlOhZ2r91sF8Pe9gsWwddstrZcKPpuk7cfi8ij3HbkOUeRL-fMyeUrRt4ZeIJ2mhvV8st_0Ge_PN3oikVbEb_FQFY3Hr-_M1cpmwQ">
+<button class="wishlist-btn absolute top-4 right-4 bg-white/80 backdrop-blur w-10 h-10 flex items-center justify-center opacity-0 transform translate-y-2 transition-all duration-300 hover:text-primary"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+<button class="absolute bottom-0 left-0 w-full py-4 bg-on-surface text-white text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300">Quick Add</button>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-caps text-secondary-fixed-variant mb-1">CAPIST Street</p>
+<h4 class="text-body-md font-semibold text-on-surface mb-2">Washed Canvas Trucker</h4>
+</div>
+<span class="text-body-md font-bold text-primary">$90</span>
+</div>
+</div>
+<div class="product-card group relative flex flex-col">
+<div class="relative aspect-[3/4] mb-4 bg-surface-container-low overflow-hidden transition-transform duration-500 ease-out">
+<img alt="Varsity Snapback" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDooIduIL3RrKp-UE3NOdn2XJ-kDXZaqjmBirl8jBSkRkZPHMy2cKU5-s8ZYRnh8sZgOjLmEnl3hsIZBxYLxFK45LOIQqIJ9wCY3x8dqHnYcHGhRdN1gYFAz18_PNpXIkraiLy2cPNjboQqGuZXyrCd2b_qo1PD4i9daYLLl0L1wJpY8rQMAMXn5tA8_Fpvb_jd-oB8KYPmrmp67IumfXnCvIQCjGh2bRh-mMdsa0qOEKqoeHPj5nLjtw">
+<button class="wishlist-btn absolute top-4 right-4 bg-white/80 backdrop-blur w-10 h-10 flex items-center justify-center opacity-0 transform translate-y-2 transition-all duration-300 hover:text-primary"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+<button class="absolute bottom-0 left-0 w-full py-4 bg-on-surface text-white text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300">Quick Add</button>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-caps text-secondary-fixed-variant mb-1">CAPIST University</p>
+<h4 class="text-body-md font-semibold text-on-surface mb-2">Varsity Wool Snapback</h4>
+</div>
+<span class="text-body-md font-bold text-primary">$115</span>
+</div>
+</div>
+<!-- Row 4: Final Selection -->
+<div class="product-card group relative flex flex-col">
+<div class="relative aspect-[3/4] mb-4 bg-surface-container-low overflow-hidden transition-transform duration-500 ease-out">
+<img alt="Technical Visor" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYriKX8sOFkS-KBt53pZbrCrfClsK-hU6tOcJHIsFucE1jFDhhvZN-3vIMHoCTdw_vZgDSgG_dqSfNOGNXO5_KT7fn6xCnqTLrEEHDiKfal6Nm21Fy6iauUWEnpKf1aXaa-E4bP8Mwg9Q78tq79Azg0GYbTl6_GnjCfrvlKRwT-pn-OZYJkjjoliocTe25-h6ZIG-blbZKv4NfmIX8ctkC3dxzH6sUIvvtEYE1-LP0cBwIpor3HTEnuw">
+<button class="wishlist-btn absolute top-4 right-4 bg-white/80 backdrop-blur w-10 h-10 flex items-center justify-center opacity-0 transform translate-y-2 transition-all duration-300 hover:text-primary"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+<button class="absolute bottom-0 left-0 w-full py-4 bg-on-surface text-white text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300">Quick Add</button>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-caps text-secondary-fixed-variant mb-1">CAPIST Performance</p>
+<h4 class="text-body-md font-semibold text-on-surface mb-2">Pro-Tech Running Visor</h4>
+</div>
+<span class="text-body-md font-bold text-primary">$65</span>
+</div>
+</div>
+<div class="product-card group relative flex flex-col">
+<div class="relative aspect-[3/4] mb-4 bg-surface-container-low overflow-hidden transition-transform duration-500 ease-out">
+<img alt="Distressed Street Cap" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDM2SgbdG_mxBPYh0dKh0os56PL-2cGb9748Y0vnSzUwhznsLI6uiRgxbyqFW_WcyhMhDvDFdmSawMkKFPvTMYKZ5CtuTK-MhGNn11V-19xOxxKjtX-ROiWTS2kLu1VTL4losiebwBGsX6LJ6wAYTlOhZ2r91sF8Pe9gsWwddstrZcKPpuk7cfi8ij3HbkOUeRL-fMyeUrRt4ZeIJ2mhvV8st_0Ge_PN3oikVbEb_FQFY3Hr-_M1cpmwQ">
+<button class="wishlist-btn absolute top-4 right-4 bg-white/80 backdrop-blur w-10 h-10 flex items-center justify-center opacity-0 transform translate-y-2 transition-all duration-300 hover:text-primary"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+<button class="absolute bottom-0 left-0 w-full py-4 bg-on-surface text-white text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300">Quick Add</button>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-caps text-secondary-fixed-variant mb-1">CAPIST Street</p>
+<h4 class="text-body-md font-semibold text-on-surface mb-2">Distressed Denim Cap</h4>
+</div>
+<span class="text-body-md font-bold text-primary">$105</span>
+</div>
+</div>
+<div class="product-card group relative flex flex-col">
+<div class="relative aspect-[3/4] mb-4 bg-surface-container-low overflow-hidden transition-transform duration-500 ease-out">
+<img alt="Cashmere Luxury Cap" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDooIduIL3RrKp-UE3NOdn2XJ-kDXZaqjmBirl8jBSkRkZPHMy2cKU5-s8ZYRnh8sZgOjLmEnl3hsIZBxYLxFK45LOIQqIJ9wCY3x8dqHnYcHGhRdN1gYFAz18_PNpXIkraiLy2cPNjboQqGuZXyrCd2b_qo1PD4i9daYLLl0L1wJpY8rQMAMXn5tA8_Fpvb_jd-oB8KYPmrmp67IumfXnCvIQCjGh2bRh-mMdsa0qOEKqoeHPj5nLjtw">
+<button class="wishlist-btn absolute top-4 right-4 bg-white/80 backdrop-blur w-10 h-10 flex items-center justify-center opacity-0 transform translate-y-2 transition-all duration-300 hover:text-primary"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+<button class="absolute bottom-0 left-0 w-full py-4 bg-on-surface text-white text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300">Quick Add</button>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-caps text-secondary-fixed-variant mb-1">CAPIST Luxury</p>
+<h4 class="text-body-md font-semibold text-on-surface mb-2">Pure Cashmere Cap</h4>
+</div>
+<span class="text-body-md font-bold text-primary">$450</span>
+</div>
+</div>
+<div class="product-card group relative flex flex-col">
+<div class="relative aspect-[3/4] mb-4 bg-surface-container-low overflow-hidden transition-transform duration-500 ease-out">
+<img alt="Archival Heritage" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYriKX8sOFkS-KBt53pZbrCrfClsK-hU6tOcJHIsFucE1jFDhhvZN-3vIMHoCTdw_vZgDSgG_dqSfNOGNXO5_KT7fn6xCnqTLrEEHDiKfal6Nm21Fy6iauUWEnpKf1aXaa-E4bP8Mwg9Q78tq79Azg0GYbTl6_GnjCfrvlKRwT-pn-OZYJkjjoliocTe25-h6ZIG-blbZKv4NfmIX8ctkC3dxzH6sUIvvtEYE1-LP0cBwIpor3HTEnuw">
+<button class="wishlist-btn absolute top-4 right-4 bg-white/80 backdrop-blur w-10 h-10 flex items-center justify-center opacity-0 transform translate-y-2 transition-all duration-300 hover:text-primary"><span class="material-symbols-outlined text-[20px]">favorite</span></button>
+<button class="absolute bottom-0 left-0 w-full py-4 bg-on-surface text-white text-label-caps opacity-0 group-hover:opacity-100 transition-opacity duration-300">Quick Add</button>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-caps text-secondary-fixed-variant mb-1">CAPIST Heritage</p>
+<h4 class="text-body-md font-semibold text-on-surface mb-2">1954 Archival Reissue</h4>
+</div>
+<span class="text-body-md font-bold text-primary">$195</span>
+</div>
+</div></div>
+<!-- Pagination -->
+<div class="mt-24 border-t border-outline-variant pt-12 flex justify-between items-center">
+<button class="flex items-center space-x-2 text-label-caps text-on-surface hover:text-primary transition-colors disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">west</span>
+<span class="">Previous</span>
+</button>
+<div class="flex items-center space-x-4">
+<a class="w-8 h-8 flex items-center justify-center text-label-caps text-white bg-primary" href="#">1</a>
+<a class="w-8 h-8 flex items-center justify-center text-label-caps text-on-surface hover:text-primary transition-colors" href="#">2</a>
+<a class="w-8 h-8 flex items-center justify-center text-label-caps text-on-surface hover:text-primary transition-colors" href="#">3</a>
+<span class="text-label-caps text-on-surface-variant">...</span>
+<a class="w-8 h-8 flex items-center justify-center text-label-caps text-on-surface hover:text-primary transition-colors" href="#">16</a>
+</div>
+<button class="flex items-center space-x-2 text-label-caps text-on-surface hover:text-primary transition-colors">
+<span class="">Next</span>
+<span class="material-symbols-outlined">east</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter Micro-Interaction -->
+</main>
+<!-- Footer -->
+<footer class="w-full py-16 bg-surface dark:bg-surface border-t border-outline-variant dark:border-outline-variant flat no shadows">
+<div class="flex flex-col md:flex-row justify-between items-start w-full px-margin-desktop max-w-container-max mx-auto gap-gutter">
+<div class="flex flex-col space-y-6">
+<a class="text-headline-sm font-headline-sm text-on-surface dark:text-on-surface" href="#">CAPIST</a>
+<p class="text-label-caps font-label-caps text-on-secondary-fixed-variant opacity-60">© 2024 CAPIST. ALL RIGHTS RESERVED.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-12">
+<div class="flex flex-col space-y-4">
+<p class="text-label-caps font-label-caps text-on-surface font-bold">Shop</p>
+<a class="text-label-caps font-label-caps text-on-secondary-fixed-variant hover:text-primary transition-colors duration-300" href="#">All Collections</a>
+<a class="text-label-caps font-label-caps text-on-secondary-fixed-variant hover:text-primary transition-colors duration-300" href="#">Limited Editions</a>
+<a class="text-label-caps font-label-caps text-on-secondary-fixed-variant hover:text-primary transition-colors duration-300" href="#">Store Locator</a>
+</div>
+<div class="flex flex-col space-y-4">
+<p class="text-label-caps font-label-caps text-on-surface font-bold">Client Service</p>
+<a class="text-label-caps font-label-caps text-on-secondary-fixed-variant hover:text-primary transition-colors duration-300" href="#">Shipping &amp; Returns</a>
+<a class="text-label-caps font-label-caps text-on-secondary-fixed-variant hover:text-primary transition-colors duration-300" href="#">Contact Us</a>
+<a class="text-label-caps font-label-caps text-on-secondary-fixed-variant hover:text-primary transition-colors duration-300" href="#">Privacy Policy</a>
+</div>
+<div class="flex flex-col space-y-4">
+<p class="text-label-caps font-label-caps text-on-surface font-bold">About</p>
+<a class="text-label-caps font-label-caps text-on-secondary-fixed-variant hover:text-primary transition-colors duration-300" href="#">Heritage</a>
+<a class="text-label-caps font-label-caps text-on-secondary-fixed-variant hover:text-primary transition-colors duration-300" href="#">Sustainability</a>
+<a class="text-label-caps font-label-caps text-on-secondary-fixed-variant hover:text-primary transition-colors duration-300" href="#">Archives</a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Simple scroll interaction for navbar
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                nav.classList.add('h-16', 'bg-surface-container-lowest/90', 'backdrop-blur-md');
+                nav.classList.remove('h-20');
+            } else {
+                nav.classList.remove('h-16', 'bg-surface-container-lowest/90', 'backdrop-blur-md');
+                nav.classList.add('h-20');
+            }
+        });
+
+        // Filter button toggle
+        const filterBtns = document.querySelectorAll('.filter-bar button');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active-filter'));
+                btn.classList.add('active-filter');
+            });
+        });
+
+        // Micro-interactions for product cards
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('cursor-pointer');
+            });
+        });
+    </script>
+
+
+</body></html>
