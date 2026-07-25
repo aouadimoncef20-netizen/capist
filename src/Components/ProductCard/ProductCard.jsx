@@ -3,27 +3,37 @@ import { useNavigate } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { FiHeart } from 'react-icons/fi';
 import Badge from '../Badge/Badge';
+import { useCart } from '../../Context/CartContext';
+import { useWishlist } from '../../Context/WishlistContext';
 
+const formatDZD = (price) => {
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' DA';
+};
 
-const ProductCard = ({ product, onQuickAdd, onWishlistToggle }) => {
-  const [wishlisted, setWishlisted] = useState(false);
+const ProductCard = ({ product }) => {
+  const [added, setAdded] = useState(false);
   const navigate = useNavigate();
+  const { addToCart } = useCart();
+  const { toggleWishlist, isWishlisted } = useWishlist();
+
+  const wishlisted = isWishlisted(product.id);
 
   const handleWishlist = useCallback(
     (e) => {
       e.stopPropagation();
-      setWishlisted((prev) => !prev);
-      if (onWishlistToggle) onWishlistToggle(product.id);
+      toggleWishlist(product.id);
     },
-    [product.id, onWishlistToggle]
+    [product.id, toggleWishlist]
   );
 
   const handleQuickAdd = useCallback(
     (e) => {
       e.stopPropagation();
-      if (onQuickAdd) onQuickAdd(product);
+      addToCart(product, 1);
+      setAdded(true);
+      setTimeout(() => setAdded(false), 1500);
     },
-    [product, onQuickAdd]
+    [product, addToCart]
   );
 
   const handleClick = () => {
@@ -51,17 +61,23 @@ const ProductCard = ({ product, onQuickAdd, onWishlistToggle }) => {
           </div>
         )}
         <button
-          className={`absolute top-2 right-2 lg:top-3 lg:right-3 w-9 h-9 lg:w-10 lg:h-10 bg-white/85 backdrop-blur-sm flex items-center justify-center text-base lg:text-lg z-[2] text-text-primary transition-colors active:text-brand-green ${wishlisted ? 'text-brand-green' : ''}`}
+          className={`absolute top-2 right-2 lg:top-3 lg:right-3 w-9 h-9 lg:w-10 lg:h-10 bg-white/85 backdrop-blur-sm flex items-center justify-center text-base lg:text-lg z-[2] transition-colors ${
+            wishlisted ? 'text-brand-green' : 'text-text-primary'
+          }`}
           onClick={handleWishlist}
           aria-label="Toggle wishlist"
         >
           <FiHeart />
         </button>
         <button
-          className="absolute bottom-0 left-0 right-0 py-3.5 lg:py-4 bg-brand-black text-white text-label font-label tracking-widest uppercase text-center z-[2] border-none cursor-pointer min-h-[44px] hidden lg:block lg:opacity-0 lg:transition-opacity lg:group-hover:opacity-100"
+          className={`absolute bottom-0 left-0 right-0 py-3.5 lg:py-4 text-white text-label font-label tracking-widest uppercase text-center z-[2] border-none cursor-pointer min-h-[44px] transition-all duration-300 ${
+            added
+              ? 'bg-brand-green'
+              : 'bg-brand-black lg:bg-brand-black/90 lg:opacity-0 lg:translate-y-1 lg:group-hover:opacity-100 lg:group-hover:translate-y-0'
+          }`}
           onClick={handleQuickAdd}
         >
-          Quick Add
+          {added ? '✓ Added!' : 'Quick Add'}
         </button>
       </div>
       <div className="flex justify-between items-start gap-2">
@@ -74,7 +90,7 @@ const ProductCard = ({ product, onQuickAdd, onWishlistToggle }) => {
           </h3>
         </div>
         <span className="text-body-sm lg:text-body-md font-bold text-brand-green whitespace-nowrap">
-          ${product.price.toFixed(2)}
+          {formatDZD(product.price)}
         </span>
       </div>
     </article>

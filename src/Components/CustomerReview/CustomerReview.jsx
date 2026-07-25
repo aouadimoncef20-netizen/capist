@@ -138,8 +138,8 @@ const CustomerReview = ({ reviews = [], onReviewSubmit }) => {
                         onMouseEnter={() => setHoverRating(star)}
                         onMouseLeave={() => setHoverRating(0)}
                         aria-label={`${star} star${star > 1 ? 's' : ''}`}
-                        className="text-[32px] text-border-medium bg-none border-none cursor-pointer transition-all leading-none p-1 min-h-[44px] min-w-[44px]"
-                        data-filled={star <= (hoverRating || rating) ? '' : undefined}
+                        className="text-[32px] bg-none border-none cursor-pointer transition-all leading-none p-1 min-h-[44px] min-w-[44px]"
+                        style={{ color: star <= (hoverRating || rating) ? '#2E8B57' : '#DADADA' }}
                       >
                         ★
                       </button>
@@ -294,8 +294,8 @@ const CustomerReview = ({ reviews = [], onReviewSubmit }) => {
                       <FiStar
                         key={i}
                         size={14}
-                        fill={i < review.rating ? '#f5a623' : 'none'}
-                        color={i < review.rating ? '#f5a623' : 'var(--border-medium)'}
+                        fill={i < review.rating ? '#2E8B57' : 'none'}
+                        color={i < review.rating ? '#2E8B57' : '#DADADA'}
                       />
                     ))}
                   </div>

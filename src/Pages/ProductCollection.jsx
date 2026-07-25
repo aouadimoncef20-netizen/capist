@@ -1,53 +1,49 @@
-import React, { useState, useMemo, useCallback } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
+import { useParams, useSearchParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiSearch, FiChevronRight } from 'react-icons/fi';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import FilterChip from '../Components/FilterChip/FilterChip';
 import Pagination from '../Components/Pagination/Pagination';
 import Button from '../Components/Button/Button';
+import ProductCard from '../Components/ProductCard/ProductCard';
 import { products } from '../Data/products';
 
 const PRODUCTS_PER_PAGE = 16;
-const FILTERS = ['All', 'Luxury', 'Streetwear', 'Sports', 'University', 'Best Sellers', 'New Arrivals', 'Limited Edition'];
+const FILTERS = ['All', 'Best Sellers', 'New Arrivals', 'Polo Ralph Lauren', 'NY', 'Nike', 'Harvard', 'New Balance', 'CAPIST'];
 
 const ProductCollection = () => {
   const { category } = useParams();
+  const [searchParams] = useSearchParams();
   const [activeFilter, setActiveFilter] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('featured');
   const [currentPage, setCurrentPage] = useState(1);
 
+  // Sync filter from URL query params (navbar links use ?brand=X or ?filter=best-sellers)
+  useEffect(() => {
+    const brand = searchParams.get('brand');
+    const filter = searchParams.get('filter');
+    if (brand) {
+      setActiveFilter(brand);
+    } else if (filter === 'best-sellers') {
+      setActiveFilter('Best Sellers');
+    } else {
+      setActiveFilter('All');
+    }
+    setCurrentPage(1);
+  }, [searchParams]);
+
   const filteredProducts = useMemo(() => {
     let result = [...products];
-
-    if (category) {
-      const catMap = {
-        luxury: 'Luxury',
-        streetwear: 'Streetwear',
-        sports: 'Sports',
-        university: 'University',
-        'best-sellers': 'Best Sellers',
-        exclusives: 'Luxury',
-        essentials: 'Essentials',
-      };
-      const mapped = catMap[category];
-      if (mapped === 'Best Sellers') {
-        result = result.filter((p) => p.badge === 'Best Seller');
-      } else if (mapped) {
-        result = result.filter((p) => p.category === mapped);
-      }
-    }
 
     if (activeFilter !== 'All') {
       if (activeFilter === 'New Arrivals') {
         result = result.filter((p) => p.badge === 'New');
-      } else if (activeFilter === 'Limited Edition') {
-        result = result.filter((p) => p.badge === 'Limited');
       } else if (activeFilter === 'Best Sellers') {
         result = result.filter((p) => p.badge === 'Best Seller');
       } else {
-        result = result.filter((p) => p.category === activeFilter);
+        // Filter by brand
+        result = result.filter((p) => p.brand === activeFilter);
       }
     }
 
@@ -79,7 +75,7 @@ const ProductCollection = () => {
     }
 
     return result;
-  }, [category, activeFilter, searchQuery, sortBy]);
+  }, [activeFilter, searchQuery, sortBy]);
 
   const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE) || 1;
   const paginatedProducts = filteredProducts.slice(
@@ -97,72 +93,45 @@ const ProductCollection = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
-  const categoryTitle = category
-    ? category.charAt(0).toUpperCase() + category.slice(1).replace('-', ' ')
-    : 'All Collections';
+  // Dynamic heading based on active filter
+  const headingText = activeFilter === 'All' ? 'All Caps' : activeFilter;
 
   return (
     <>
-      {/* Hero */}
-      <section className="py-12 lg:py-24 bg-white">
+      {/* Compact Hero */}
+      <section className="py-8 lg:py-12 bg-white border-b border-border-light">
         <div className="max-w-7xl mx-auto px-4 md:px-6 xl:px-8">
-          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-gutter-mobile lg:gap-gutter items-center">
-            <div className="py-4 md:py-12">
-              <nav className="flex items-center gap-1.5 lg:gap-2 mb-4 lg:mb-6 overflow-x-auto whitespace-nowrap scrollbar-hide">
-                <Link to="/" className="text-[10px] lg:text-label font-label tracking-widest uppercase text-text-muted hover:text-brand-green transition-colors">Home</Link>
+          <nav className="flex items-center gap-1.5 lg:gap-2 mb-3 lg:mb-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
+            <Link to="/" className="text-[10px] lg:text-label font-label tracking-widest uppercase text-text-muted hover:text-brand-green transition-colors">Home</Link>
+            <span className="text-text-muted text-label"><FiChevronRight size={14} /></span>
+            <span className="text-[10px] lg:text-label font-label tracking-widest uppercase text-text-muted">Shop</span>
+            {activeFilter !== 'All' && (
+              <>
                 <span className="text-text-muted text-label"><FiChevronRight size={14} /></span>
-                <Link to="/collections" className="text-[10px] lg:text-label font-label tracking-widest uppercase text-text-muted hover:text-brand-green transition-colors">Shop</Link>
-                <span className="text-text-muted text-label"><FiChevronRight size={14} /></span>
-                <span className="text-[10px] lg:text-label font-label tracking-widest uppercase text-text-muted">{categoryTitle}</span>
-              </nav>
+                <span className="text-[10px] lg:text-label font-label tracking-widest uppercase text-brand-green">{headingText}</span>
+              </>
+            )}
+          </nav>
 
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+            <div>
               <motion.h1
-                className="font-display text-display-md lg:text-display-lg font-bold tracking-tighter leading-tight mb-4 lg:mb-6"
-                initial={{ opacity: 0, y: 20 }}
+                className="font-display text-display-sm lg:text-display-md font-bold tracking-tighter leading-tight"
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.5 }}
               >
-                Discover Your Perfect Cap
+                {headingText}
               </motion.h1>
-
               <motion.p
-                className="text-body-sm lg:text-body-lg text-text-secondary/80 mb-6 lg:mb-8 max-w-[540px] leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-body-sm text-text-secondary/70 mt-1"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
               >
-                Explore premium luxury, streetwear, sports, and university collections
-                carefully curated for every style. Crafted with architectural precision
-                and a less-but-better philosophy.
+                {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''} available
               </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <Button variant="primary" size="md">
-                  <Link to="/collections" className="text-inherit no-underline">
-                    Explore Collections
-                  </Link>
-                </Button>
-              </motion.div>
             </div>
-
-            <motion.div
-              className="relative aspect-[4/5] overflow-hidden"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-            >
-              <LazyLoadImage
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC94ncVhdI1CZHlXbsmOv_1UyWgygaS7SBprdvHq9FeCk7Y7xdti8NKoHGPNPz_PWBpKWBE7uKiLBGxkbv8xOXwUK0bQJf3KdJSljwQjEWWBA-azOyba1HsvGMtOmgf0z1fD5kpcooh2ywg39R0lDDQze12UkLPUshco2uB4sg7w1hTLZJT27Hk5HpSyAIS0LOjCw07r7V6D7z0w7cvmsqSMLgR9q1CJvOxE3qScxl6XDdLDdFwIblrUw"
-                alt="Premium cap collection"
-                effect="opacity"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
-            </motion.div>
           </div>
         </div>
       </section>
@@ -170,7 +139,7 @@ const ProductCollection = () => {
       {/* Products */}
       <section className="max-w-7xl mx-auto px-4 md:px-6 xl:px-8 pb-20 md:pb-[120px]">
         {/* Sticky Filter Bar */}
-        <div className="sticky top-[var(--navbar-height)] z-40 bg-white/95 backdrop-blur-md py-4 lg:py-6 mb-6 lg:mb-12 border-b border-border-light flex items-center overflow-x-auto gap-3 lg:gap-4 scrollbar-hide">
+        <div className="sticky top-[var(--navbar-height)] z-40 bg-white/95 backdrop-blur-md py-4 lg:py-5 mb-6 lg:mb-10 border-b border-border-light flex items-center overflow-x-auto gap-2 lg:gap-3 scrollbar-hide">
           {FILTERS.map((filter) => (
             <FilterChip
               key={filter}
@@ -187,7 +156,7 @@ const ProductCollection = () => {
             <FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 text-lg" />
             <input
               type="text"
-              placeholder="Search collection..."
+              placeholder="Search by name, brand, or category..."
               value={searchQuery}
               onChange={(e) => {
                 setSearchQuery(e.target.value);
@@ -230,16 +199,14 @@ const ProductCollection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
               >
-                <div className="p-10 bg-gray-50 text-center text-gray-500 text-xs tracking-[0.1em] uppercase">
-                  {product.name}
-                </div>
+                <ProductCard product={product} />
               </motion.div>
             ))
           ) : (
             <div className="col-span-full text-center py-12 lg:py-20 text-text-muted">
               <p className="text-base md:text-lg mb-4 md:mb-6">No products found.</p>
               <p className="text-sm mb-6 opacity-70">
-                Products will appear here once added to the data source.
+                Try adjusting your search or filter to find what you're looking for.
               </p>
               <Button
                 variant="secondary"

@@ -1,22 +1,37 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FiLock } from 'react-icons/fi';
+import { FiLock, FiChevronLeft, FiTruck } from 'react-icons/fi';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Button from '../Components/Button/Button';
+import { useCart } from '../Context/CartContext';
+
+const formatDZD = (price) => {
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' DA';
+};
 
 // Shared class for form inputs
 const inputClass = 'border-0 border-b border-border-light py-3 bg-transparent outline-none text-body-md text-text-primary focus:border-brand-green';
 
 const Checkout = () => {
+  const { items, subtotal } = useCart();
+  const shipping = subtotal > 0 ? 3500 : 0;
+  const tax = Math.round(subtotal * 0.05);
+  const total = subtotal + shipping + tax;
+
   return (
     <div className="pb-20 lg:pb-[120px]">
       <div className="max-w-[720px] mx-auto px-margin-mobile lg:px-margin-desktop">
 
         {/* Header */}
-        <motion.div className="mb-12"
+        <motion.div className="mb-6 lg:mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
+          <Link to="/cart" className="inline-flex items-center gap-1 text-label font-label tracking-widest uppercase text-text-muted hover:text-brand-green transition-colors mb-4">
+            <FiChevronLeft size={14} /> Back to Cart
+          </Link>
           <h1 className="font-display text-headline-lg font-semibold mb-2">Checkout</h1>
         </motion.div>
 
@@ -42,20 +57,30 @@ const Checkout = () => {
         </div>
 
         {/* Order Summary */}
-        <div className="bg-surface-secondary p-8 border border-border-light mb-12">
+        <div className="bg-surface-secondary p-6 lg:p-8 border border-border-light mb-12">
           <h3 className="text-label font-label uppercase text-brand-green mb-6">Order Summary</h3>
-          <div className="flex gap-4 py-4 border-b border-border-light">
-            <div className="w-20 aspect-[3/4] overflow-hidden bg-surface-tertiary" style={{ background: '#eee' }} />
-            <div className="flex-1">
-              <p className="font-semibold text-body-sm mb-1">The Signature Cap</p>
-              <p className="text-label text-text-muted">Qty: 1 — Obsidian Black</p>
-            </div>
-            <span className="font-medium whitespace-nowrap">$145.00</span>
-          </div>
-          <div className="flex justify-between mt-4 font-semibold">
-            <span>Total</span>
-            <span className="text-brand-green text-xl">$502.00</span>
-          </div>
+          {items.length > 0 ? (
+            <>
+              {items.map((item) => (
+                <div key={item.id} className="flex gap-4 py-4 border-b border-border-light last:border-b-0">
+                  <div className="w-20 aspect-[3/4] overflow-hidden bg-surface-tertiary flex-shrink-0">
+                    <LazyLoadImage src={item.image} alt={item.name} className="w-full h-full object-cover" effect="opacity" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-semibold text-body-sm mb-1">{item.name}</p>
+                    <p className="text-label text-text-muted">{item.brand} · Qty: {item.quantity}</p>
+                  </div>
+                  <span className="font-medium whitespace-nowrap">{formatDZD(item.price * item.quantity)}</span>
+                </div>
+              ))}
+              <div className="flex justify-between mt-4 font-semibold">
+                <span>Total</span>
+                <span className="text-brand-green text-xl">{formatDZD(total)}</span>
+              </div>
+            </>
+          ) : (
+            <p className="text-text-muted text-sm">No items in cart.</p>
+          )}
         </div>
 
         {/* Shipping Form */}
@@ -79,12 +104,8 @@ const Checkout = () => {
               </div>
             </div>
             <div className="flex flex-col">
-              <label className="text-label font-label uppercase text-text-muted mb-2">Address Line 1</label>
+              <label className="text-label font-label uppercase text-text-muted mb-2">Address</label>
               <input type="text" placeholder="Street address, P.O. box" className={inputClass} />
-            </div>
-            <div className="flex flex-col">
-              <label className="text-label font-label uppercase text-text-muted mb-2">Address Line 2 (Optional)</label>
-              <input type="text" placeholder="Apartment, suite, unit" className={inputClass} />
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="flex flex-col">
@@ -110,7 +131,7 @@ const Checkout = () => {
           <h2 className="font-display text-headline-sm uppercase tracking-tight text-brand-green mb-6">Payment Methods</h2>
 
           <div className="flex items-center gap-4 p-4 border border-brand-green bg-brand-green/5 mb-4">
-            <span className="text-2xl text-brand-green">$</span>
+            <span className="text-2xl text-brand-green font-bold">DA</span>
             <div>
               <p className="text-label font-label uppercase text-brand-green">
                 Paiement à la livraison (Cash on Delivery)
@@ -121,7 +142,7 @@ const Checkout = () => {
 
           <div className="pt-8">
             <Button variant="green" size="full">
-              Complete Purchase →
+              Complete Purchase — {formatDZD(total)} →
             </Button>
             <p className="mt-4 text-body-sm text-text-muted text-center flex items-center justify-center gap-2">
               <FiLock size={14} />
@@ -130,6 +151,9 @@ const Checkout = () => {
           </div>
         </motion.div>
 
+        <div className="flex items-center gap-2 text-text-muted text-[10px] font-label tracking-widest uppercase justify-center">
+          <FiTruck size={14} /> Complimentary Shipping on all orders
+        </div>
       </div>
     </div>
   );

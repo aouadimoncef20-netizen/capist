@@ -28,11 +28,11 @@ const Footer = () => {
           <div>
             <h4 className="text-label font-label tracking-widest uppercase text-text-primary mb-4 lg:mb-6">Shop</h4>
             <div className="flex flex-col gap-2.5">
-              <Link to="/collections/luxury" className={linkClass}>Luxury</Link>
-              <Link to="/collections/streetwear" className={linkClass}>Streetwear</Link>
-              <Link to="/collections/sports" className={linkClass}>Sports</Link>
-              <Link to="/collections/exclusives" className={linkClass}>Exclusives</Link>
-              <Link to="/collections/best-sellers" className={linkClass}>Best Sellers</Link>
+              <Link to="/collections" className={linkClass}>All Caps</Link>
+              <Link to="/collections?filter=best-sellers" className={linkClass}>Best Sellers</Link>
+              <Link to="/collections?brand=Polo+Ralph+Lauren" className={linkClass}>Polo Ralph Lauren</Link>
+              <Link to="/collections?brand=NY" className={linkClass}>NY</Link>
+              <Link to="/collections?brand=Nike" className={linkClass}>Nike</Link>
             </div>
           </div>
 
@@ -42,9 +42,8 @@ const Footer = () => {
             <div className="flex flex-col gap-2.5">
               <Link to="/about" className={linkClass}>About Us</Link>
               <Link to="/contact" className={linkClass}>Contact</Link>
-              <Link to="/about" className={linkClass}>Shipping</Link>
-              <Link to="/about" className={linkClass}>Returns</Link>
-              <Link to="/terms" className={linkClass}>Terms</Link>
+              <Link to="/faq" className={linkClass}>FAQ</Link>
+              <Link to="/about" className={linkClass}>Shipping &amp; Returns</Link>
             </div>
           </div>
 
@@ -52,9 +51,9 @@ const Footer = () => {
           <div>
             <h4 className="text-label font-label tracking-widest uppercase text-text-primary mb-4 lg:mb-6">Stay Connected</h4>
             <div className="flex gap-4 mb-6 lg:mb-8">
-              <button className={socialBtnClass} aria-label="Instagram"><FiGlobe /></button>
-              <button className={socialBtnClass} aria-label="Twitter"><FiShare2 /></button>
-              <button className={socialBtnClass} aria-label="Email"><FiMail /></button>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className={socialBtnClass} aria-label="Instagram"><FiGlobe /></a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className={socialBtnClass} aria-label="Twitter"><FiShare2 /></a>
+              <a href="mailto:hello@capist.com" className={socialBtnClass} aria-label="Email"><FiMail /></a>
             </div>
             <p className="text-body-sm lg:text-body-md text-text-muted mb-3 lg:mb-4">Subscribe for new drop alerts.</p>
             <div className="flex border-b border-border-light pb-2">
@@ -76,10 +75,10 @@ const Footer = () => {
             © 2026 CAPIST. ARCHITECTURAL PRECISION IN HEADWEAR.
           </p>
           <div className="flex gap-4 lg:gap-8 flex-wrap justify-center">
-            <Link to="/privacy" className="text-label font-label tracking-widest text-text-muted transition-colors min-h-[44px] flex items-center active:text-text-primary lg:hover:text-text-primary">
+            <Link to="/about" className="text-label font-label tracking-widest text-text-muted transition-colors min-h-[44px] flex items-center active:text-text-primary lg:hover:text-text-primary">
               Privacy Policy
             </Link>
-            <Link to="/terms" className="text-label font-label tracking-widest text-text-muted transition-colors min-h-[44px] flex items-center active:text-text-primary lg:hover:text-text-primary">
+            <Link to="/about" className="text-label font-label tracking-widest text-text-muted transition-colors min-h-[44px] flex items-center active:text-text-primary lg:hover:text-text-primary">
               Terms of Service
             </Link>
           </div>

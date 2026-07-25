@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiX, FiChevronLeft, FiChevronRight, FiMaximize2 } from 'react-icons/fi';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -55,6 +56,7 @@ const GALLERY_IMAGES = [
 const Lookbook = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
 
   const openModal = (index) => {
     setCurrentIndex(index);
@@ -189,7 +191,7 @@ const Lookbook = () => {
                 {currentIndex + 1} / {GALLERY_IMAGES.length}
               </p>
 
-              <button className="absolute bottom-4 lg:bottom-10 left-1/2 -translate-x-1/2 px-7 lg:px-10 py-3.5 lg:py-4 bg-brand-green text-white text-[10px] lg:text-label font-label tracking-widest uppercase cursor-pointer transition-colors z-10 whitespace-nowrap min-h-[44px] border-none active:bg-brand-green-dark lg:hover:bg-brand-green-dark">
+              <button onClick={() => { closeModal(); navigate('/collections'); }} className="absolute bottom-4 lg:bottom-10 left-1/2 -translate-x-1/2 px-7 lg:px-10 py-3.5 lg:py-4 bg-brand-green text-white text-[10px] lg:text-label font-label tracking-widest uppercase cursor-pointer transition-colors z-10 whitespace-nowrap min-h-[44px] border-none active:bg-brand-green-dark lg:hover:bg-brand-green-dark">
                 Shop This Look
               </button>
             </motion.div>

@@ -1,254 +1,225 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useMemo } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { FiChevronRight, FiMinus, FiPlus } from 'react-icons/fi';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Button from '../Components/Button/Button';
+import ProductCard from '../Components/ProductCard/ProductCard';
+import { useCart } from '../Context/CartContext';
+import { products } from '../Data/products';
+
+const formatDZD = (price) => {
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' DA';
+};
+
+const fadeUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6 },
+};
 
 const ProductDetails = () => {
-  const [selectedColor, setSelectedColor] = useState(0);
-  const [selectedSize, setSelectedSize] = useState(null);
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
+  const [selectedImage, setSelectedImage] = useState(0);
+  const [quantity, setQuantity] = useState(1);
 
-  const product = {
-    title: 'Silk Drape Gown',
-    price: '$1,890',
-    description:
-      'Crafted from fluid silk charmeuse with a bias cut that skims the body. Features a draped cowl neckline and an open back finished with delicate spaghetti straps.',
-    colors: [
-      { name: 'Ivory', hex: '#F5F0E8' },
-      { name: 'Noir', hex: '#1A1A1A' },
-      { name: 'Crimson', hex: '#8B1A1A' },
-      { name: 'Navy', hex: '#1B2A4A' },
-    ],
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    images: [
-      'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800&q=80',
-      'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=800&q=80',
-      'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=800&q=80',
-    ],
-    stylistPicks: [
-      { name: 'Leather Clutch', price: '$420', image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&q=80' },
-      { name: 'Gold Heels', price: '$680', image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&q=80' },
-    ],
-    related: [
-      { name: 'Evening Maxi', price: '$1,560', image: 'https://images.unsplash.com/photo-1591369822096-ffd140ec948f?w=400&q=80' },
-      { name: 'Satin Slip', price: '$980', image: 'https://images.unsplash.com/photo-1434389677669-e08b4cda3a20?w=400&q=80' },
-      { name: 'Chiffon Cape', price: '$2,100', image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80' },
-      { name: 'Velvet Midi', price: '$1,340', image: 'https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?w=400&q=80' },
-    ],
-    reviews: [
-      { author: 'Amira K.', rating: 5, text: 'Absolutely stunning — the drape is divine and the fabric feels incredible against the skin.' },
-      { author: 'Layla M.', rating: 5, text: 'Wore this to a gala and received endless compliments. Worth every penny.' },
-      { author: 'Noor S.', rating: 4, text: 'Beautiful gown, runs slightly large. I sized down and the fit was perfect.' },
-      { author: 'Zara H.', rating: 5, text: 'The bias cut is so flattering. My new go-to for formal occasions.' },
-    ],
-  };
+  const product = useMemo(
+    () => products.find((p) => p.id === Number(id)),
+    [id]
+  );
 
-  const fadeUp = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 },
-  };
+  const productImages = useMemo(() => {
+    if (!product) return [];
+    return [product.image];
+  }, [product]);
+
+  const relatedProducts = useMemo(() => {
+    if (!product) return [];
+    return products
+      .filter((p) => p.brand === product.brand && p.id !== product.id)
+      .slice(0, 4);
+  }, [product]);
+
+  if (!product) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4 px-4">
+        <p className="font-display text-headline-sm text-text-primary">Product not found</p>
+        <p className="text-text-muted text-sm">This cap doesn't exist in our collection.</p>
+        <Button variant="primary" size="sm" onClick={() => navigate('/collections')}>
+          Back to Shop
+        </Button>
+      </div>
+    );
+  }
 
   return (
-    <div className="pt-6 lg:pt-8 pb-20 lg:pb-[120px]">
-      <div className="max-w-container mx-auto px-margin-mobile lg:px-margin-desktop">
+    <div className="pt-4 lg:pt-6 pb-20 lg:pb-[120px]">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 xl:px-8">
+        {/* Breadcrumb */}
+        <nav className="flex items-center gap-1.5 lg:gap-2 mb-4 lg:mb-6 overflow-x-auto whitespace-nowrap scrollbar-hide">
+          <Link to="/" className="text-[10px] lg:text-label font-label tracking-widest uppercase text-text-muted hover:text-brand-green transition-colors">Home</Link>
+          <span className="text-text-muted text-label"><FiChevronRight size={14} /></span>
+          <Link to="/collections" className="text-[10px] lg:text-label font-label tracking-widest uppercase text-text-muted hover:text-brand-green transition-colors">Shop</Link>
+          <span className="text-text-muted text-label"><FiChevronRight size={14} /></span>
+          <span className="text-[10px] lg:text-label font-label tracking-widest uppercase text-text-muted">{product.name}</span>
+        </nav>
 
         {/* ── Main Layout ── */}
         <div className="flex flex-col lg:grid lg:grid-cols-[7fr_5fr] gap-gutter-mobile lg:gap-gutter lg:items-start">
-
-          {/* ── Gallery ── */}
+          {/* ── Image Gallery ── */}
           <div className="flex flex-col gap-3 lg:gap-gutter">
             <motion.div
-              className="aspect-[3/4] overflow-hidden"
+              className="aspect-[3/4] overflow-hidden bg-surface-tertiary"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6 }}
             >
-              <img
-                src={product.images[0]}
-                alt={product.title}
+              <LazyLoadImage
+                src={productImages[selectedImage]}
+                alt={product.name}
                 className="w-full h-full object-cover"
+                effect="opacity"
               />
             </motion.div>
 
-            {/* Thumbnails */}
             <div className="grid grid-cols-3 gap-3 lg:gap-gutter">
-              {product.images.map((img, idx) => (
+              {productImages.map((img, idx) => (
                 <div
                   key={idx}
-                  className="aspect-[3/4] overflow-hidden cursor-pointer active:scale-110 lg:hover:scale-110 transition-transform duration-500"
+                  onClick={() => setSelectedImage(idx)}
+                  className={`aspect-[3/4] overflow-hidden cursor-pointer transition-all duration-300 ${
+                    selectedImage === idx
+                      ? 'ring-2 ring-brand-green ring-offset-2'
+                      : 'opacity-70 hover:opacity-100'
+                  }`}
                 >
-                  <img
+                  <LazyLoadImage
                     src={img}
-                    alt={`${product.title} ${idx + 1}`}
+                    alt={`${product.name} ${idx + 1}`}
                     className="w-full h-full object-cover"
+                    effect="opacity"
                   />
                 </div>
               ))}
             </div>
           </div>
 
-          {/* ── Product Details ── */}
+          {/* ── Product Info ── */}
           <motion.div
-            className="flex flex-col gap-6 lg:gap-8 lg:sticky lg:top-[100px]"
+            className="flex flex-col gap-5 lg:gap-7 lg:sticky lg:top-[100px]"
             {...fadeUp}
           >
-            {/* Title & Price */}
             <div>
-              <h1 className="font-display text-headline-lg font-semibold leading-tight mb-2">
-                {product.title}
-              </h1>
-              <p className="text-lg lg:text-xl font-medium text-brand-green">
-                {product.price}
+              <p className="text-[10px] lg:text-label font-label tracking-widest uppercase text-brand-green mb-1">
+                {product.brand}
               </p>
+              <h1 className="font-display text-headline-lg font-semibold leading-tight mb-2">
+                {product.name}
+              </h1>
+              <p className="text-xl lg:text-2xl font-bold text-brand-green">
+                {formatDZD(product.price)}
+              </p>
+              {product.rating && (
+                <div className="flex items-center gap-2 mt-2">
+                  <span className="text-brand-green text-sm">
+                    {'★'.repeat(Math.round(product.rating))}{'☆'.repeat(5 - Math.round(product.rating))}
+                  </span>
+                  <span className="text-label text-text-muted">
+                    {product.rating.toFixed(1)} ({product.reviews || 0} reviews)
+                  </span>
+                </div>
+              )}
             </div>
 
-            {/* Description */}
+            {product.badge && (
+              <span className={`inline-block w-fit px-3 py-1 text-[10px] lg:text-label font-label tracking-widest uppercase ${
+                product.badgeVariant === 'green'
+                  ? 'bg-brand-green text-white'
+                  : 'bg-brand-black text-white'
+              }`}>
+                {product.badge}
+              </span>
+            )}
+
             <p className="text-text-secondary leading-relaxed">
               {product.description}
             </p>
 
-            {/* Color Options */}
             <div>
               <p className="text-label font-label tracking-widest uppercase text-text-secondary mb-3">
-                Color: {product.colors[selectedColor].name}
+                Quantity
               </p>
-              <div className="flex gap-3">
-                {product.colors.map((color, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setSelectedColor(idx)}
-                    className={`w-8 h-8 rounded-full border-2 cursor-pointer transition-all ${
-                      selectedColor === idx
-                        ? 'border-brand-green shadow-[0_0_0_2px_white,0_0_0_4px_#2E8B57]'
-                        : 'border-transparent active:border-brand-green'
-                    }`}
-                    style={{ backgroundColor: color.hex }}
-                    aria-label={color.name}
-                  />
-                ))}
+              <div className="flex items-center gap-4 border border-border-dark w-fit">
+                <button
+                  onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                  className="p-3 hover:bg-surface-tertiary transition-colors cursor-pointer"
+                  aria-label="Decrease quantity"
+                >
+                  <FiMinus size={16} />
+                </button>
+                <span className="min-w-[2ch] text-center font-semibold">{quantity}</span>
+                <button
+                  onClick={() => setQuantity((q) => Math.min(10, q + 1))}
+                  className="p-3 hover:bg-surface-tertiary transition-colors cursor-pointer"
+                  aria-label="Increase quantity"
+                >
+                  <FiPlus size={16} />
+                </button>
               </div>
             </div>
 
-            {/* Size Options */}
-            <div>
-              <p className="text-label font-label tracking-widest uppercase text-text-secondary mb-3">
-                Size
-              </p>
-              <div className="grid grid-cols-3 gap-2.5">
-                {product.sizes.map((size) => (
-                  <button
-                    key={size}
-                    onClick={() => setSelectedSize(size)}
-                    className={`p-3 border border-border-dark text-label font-label tracking-widest uppercase cursor-pointer transition-all min-h-[44px] ${
-                      selectedSize === size
-                        ? 'border-text-primary bg-text-primary text-white font-bold'
-                        : 'text-text-secondary active:border-text-primary'
-                    }`}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Add to Cart */}
-            <Button variant="primary" size="lg" className="w-full">
-              Add to Cart
+            <Button
+              variant="primary"
+              size="lg"
+              className="w-full"
+              onClick={() => {
+                addToCart(product, quantity);
+                navigate('/cart');
+              }}
+            >
+              Add to Cart — {formatDZD(product.price * quantity)}
             </Button>
 
-            {/* Accordion-style details */}
-            <div className="border-t border-border-dark pt-6">
+            <div className="border-t border-border-dark pt-5">
               <details className="group">
-                <summary className="text-label font-label tracking-widest uppercase cursor-pointer list-none flex justify-between items-center">
-                  Details &amp; Care
+                <summary className="text-label font-label tracking-widest uppercase cursor-pointer list-none flex justify-between items-center py-2">
+                  Details
                   <span className="transition-transform group-open:rotate-180">▾</span>
                 </summary>
                 <p className="mt-3 text-text-secondary text-sm leading-relaxed">
-                  100% Silk Charmeuse. Dry clean only. Made in Italy.
+                  Premium quality cap by {product.brand}.
+                  One size fits most with adjustable strap closure.
+                  100% cotton or polyester blend. Spot clean recommended.
+                </p>
+              </details>
+              <details className="group border-t border-border-light">
+                <summary className="text-label font-label tracking-widest uppercase cursor-pointer list-none flex justify-between items-center py-2">
+                  Shipping &amp; Returns
+                  <span className="transition-transform group-open:rotate-180">▾</span>
+                </summary>
+                <p className="mt-3 text-text-secondary text-sm leading-relaxed">
+                  Complimentary shipping on all orders. 30-day return policy
+                  for unworn items in original packaging.
                 </p>
               </details>
             </div>
           </motion.div>
         </div>
 
-        {/* ── Stylist Picks ── */}
-        <motion.section
-          className="flex flex-col lg:grid lg:grid-cols-2 gap-gutter-mobile lg:gap-gutter mt-8 lg:mt-12"
-          {...fadeUp}
-        >
-          <h2 className="font-display text-headline-md font-semibold lg:col-span-2">
-            Stylist Picks
-          </h2>
-          {product.stylistPicks.map((item, idx) => (
-            <Link
-              key={idx}
-              to={`/products/${item.name.toLowerCase().replace(/\s+/g, '-')}`}
-              className="no-underline relative group overflow-hidden"
-            >
-              <div className="aspect-[3/4] overflow-hidden">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <span className="absolute bottom-4 lg:bottom-6 left-4 lg:left-6 bg-brand-green/90 text-white px-5 lg:px-6 py-2 text-[10px] lg:text-label font-label tracking-widest uppercase">
-                {item.name} — {item.price}
-              </span>
-            </Link>
-          ))}
-        </motion.section>
-
-        {/* ── Related Products ── */}
-        <motion.section {...fadeUp}>
-          <h2 className="font-display text-headline-md font-semibold mb-4">
-            You May Also Like
-          </h2>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-gutter-mobile lg:gap-gutter mt-8 lg:mt-12">
-            {product.related.map((item, idx) => (
-              <Link
-                key={idx}
-                to={`/products/${item.name.toLowerCase().replace(/\s+/g, '-')}`}
-                className="no-underline group"
-              >
-                <div className="aspect-[3/4] overflow-hidden mb-3">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-                <p className="text-label font-label tracking-widest uppercase">
-                  {item.name}
-                </p>
-                <p className="text-sm text-text-secondary mt-1">{item.price}</p>
-              </Link>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* ── Reviews ── */}
-        <motion.section {...fadeUp}>
-          <h2 className="font-display text-headline-md font-semibold">
-            Reviews
-          </h2>
-          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-gutter-mobile lg:gap-gutter mt-8 lg:mt-12">
-            {product.reviews.map((review, idx) => (
-              <div key={idx} className="border border-border-dark p-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <p className="font-label font-semibold">{review.author}</p>
-                  <span className="text-brand-green text-sm">
-                    {'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}
-                  </span>
-                </div>
-                <p className="text-text-secondary text-sm leading-relaxed">
-                  {review.text}
-                </p>
-              </div>
-            ))}
-          </div>
-        </motion.section>
-
+        {relatedProducts.length > 0 && (
+          <motion.section className="mt-12 lg:mt-16" {...fadeUp}>
+            <h2 className="font-display text-headline-md font-semibold mb-6">
+              More from {product.brand}
+            </h2>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-gutter-mobile lg:gap-gutter">
+              {relatedProducts.map((p) => (
+                <ProductCard key={p.id} product={p} />
+              ))}
+            </div>
+          </motion.section>
+        )}
       </div>
     </div>
   );

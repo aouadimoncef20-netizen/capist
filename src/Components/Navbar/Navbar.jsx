@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiSearch, FiHeart, FiShoppingBag, FiUser } from 'react-icons/fi';
+import { FiSearch, FiHeart, FiShoppingBag, FiUser, FiX } from 'react-icons/fi';
+import { useCart } from '../../Context/CartContext';
 
-// Navigation links shown in the menu bar
+// Navigation links shown in the menu bar — all go to the collection page with brand filtering
 const NAV_ITEMS = [
-  { label: 'Luxury', path: '/collections/luxury' },
-  { label: 'Streetwear', path: '/collections/streetwear' },
-  { label: 'Sports', path: '/collections/sports' },
-  { label: 'Exclusives', path: '/collections/exclusives' },
-  { label: 'Best Sellers', path: '/collections/best-sellers' },
+  { label: 'All Caps', path: '/collections' },
+  { label: 'Polo Ralph Lauren', path: '/collections?brand=Polo+Ralph+Lauren' },
+  { label: 'NY', path: '/collections?brand=NY' },
+  { label: 'Nike', path: '/collections?brand=Nike' },
+  { label: 'Best Sellers', path: '/collections?filter=best-sellers' },
 ];
 
 // Shared class string for the icon buttons (search, heart, bag, user)
@@ -20,6 +21,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const { totalItems } = useCart();
 
   // Add shadow when user scrolls down
   const handleScroll = useCallback(() => {
@@ -37,7 +39,8 @@ const Navbar = () => {
   }, [location.pathname]);
 
   // Check if a nav link is the current page
-  const isActive = (path) => location.pathname === path;
+  const isActive = (path) => location.pathname + location.search === path ||
+    (path === '/collections' && location.pathname === '/collections' && !location.search);
 
   // Combine navbar classes based on scroll state
   const navbarClass = [
@@ -73,11 +76,11 @@ const Navbar = () => {
 
         {/* Right side: Icon buttons + Hamburger */}
         <div className="flex items-center gap-3 lg:gap-6">
-          <Link to="/search" className={iconBtnClass} aria-label="Search"><FiSearch /></Link>
+          <Link to="/collections" className={iconBtnClass} aria-label="Search"><FiSearch /></Link>
           <Link to="/favorites" className={iconBtnClass} aria-label="Favorites"><FiHeart /></Link>
           <Link to="/cart" className={iconBtnClass} aria-label="Cart">
             <FiShoppingBag />
-            <span className="absolute top-0.5 right-0.5 w-[18px] h-[18px] bg-brand-green text-white text-[10px] font-bold rounded-full flex items-center justify-center pointer-events-none">0</span>
+            <span className="absolute top-0.5 right-0.5 w-[18px] h-[18px] bg-brand-green text-white text-[10px] font-bold rounded-full flex items-center justify-center pointer-events-none">{totalItems > 0 ? totalItems : ''}</span>
           </Link>
           <Link to="/account" className={iconBtnClass} aria-label="Account"><FiUser /></Link>
 
@@ -88,9 +91,15 @@ const Navbar = () => {
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
           >
-            <span className={`w-[22px] h-[0.5px] bg-text-primary transition-all block rounded ${menuOpen ? 'rotate-45 translate-y-[5px]' : ''}`} />
-            <span className={`w-[22px] h-[0.5px] bg-text-primary transition-all block rounded ${menuOpen ? 'opacity-0' : ''}`} />
-            <span className={`w-[22px] h-[0.5px] bg-text-primary transition-all block rounded ${menuOpen ? '-rotate-45 -translate-y-[5px]' : ''}`} />
+            {menuOpen ? (
+              <FiX size={22} className="text-text-primary" />
+            ) : (
+              <>
+                <span className="w-[22px] h-[0.5px] bg-text-primary transition-all block rounded" />
+                <span className="w-[22px] h-[0.5px] bg-text-primary transition-all block rounded" />
+                <span className="w-[22px] h-[0.5px] bg-text-primary transition-all block rounded" />
+              </>
+            )}
           </button>
         </div>
       </nav>
@@ -99,7 +108,7 @@ const Navbar = () => {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="absolute top-full left-0 right-0 bg-white border-b border-border-light p-4 px-margin-mobile flex flex-col gap-1 max-h-[80vh] overflow-y-auto"
+            className="absolute top-full left-0 right-0 bg-white border-b border-border-light p-4 px-margin-mobile flex flex-col gap-1 max-h-[80vh] overflow-y-auto shadow-lg"
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
@@ -116,6 +125,10 @@ const Navbar = () => {
                 {item.label}
               </Link>
             ))}
+            <div className="flex items-center gap-4 mt-3 pt-3 border-t border-border-light">
+              <Link to="/favorites" className="text-label font-label tracking-widest uppercase text-text-secondary py-2 min-h-[44px] flex items-center gap-2"><FiHeart size={16} /> Favorites</Link>
+              <Link to="/account" className="text-label font-label tracking-widest uppercase text-text-secondary py-2 min-h-[44px] flex items-center gap-2"><FiUser size={16} /> Account</Link>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

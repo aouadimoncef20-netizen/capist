@@ -7,6 +7,7 @@ import 'react-lazy-load-image-component/src/effects/opacity.css';
 import SectionTitle from '../Components/SectionTitle/SectionTitle';
 import Button from '../Components/Button/Button';
 import CustomerReview from '../Components/CustomerReview/CustomerReview';
+import ProductCard from '../Components/ProductCard/ProductCard';
 import { products, instagramImages, reviews as initialReviews } from '../Data/products';
 
 // Reusable animation configs
@@ -36,8 +37,8 @@ const valuePropClass =
   'flex items-center gap-2 lg:gap-3 text-white/80 text-[10px] lg:text-label font-label tracking-wider lg:tracking-widest uppercase whitespace-nowrap';
 
 const Home = () => {
-  const favoriteCaps = products;
-  const bestSellers = products;
+  const favoriteCaps = products.filter((p) => p.badge === 'Best Seller' || p.rating >= 4.7);
+  const bestSellers = products.filter((p) => p.badge === 'Best Seller');
   const [reviews, setReviews] = useState(initialReviews);
   const [igHover, setIgHover] = useState(null);
 
@@ -83,7 +84,7 @@ const Home = () => {
               <Link to="/collections" className="text-inherit no-underline">SHOP COLLECTION</Link>
             </Button>
             <Button variant="outlineWhite" size="lg">
-              <Link to="/collections" className="text-inherit no-underline">EXPLORE CATEGORIES</Link>
+              <Link to="/collections?filter=best-sellers" className="text-inherit no-underline">BEST SELLERS</Link>
             </Button>
           </motion.div>
         </div>
@@ -148,9 +149,9 @@ const Home = () => {
             transition={{ duration: 0.6, staggerChildren: 0.08 }}
           >
             {favoriteCaps.length > 0 ? (
-              favoriteCaps.map((product) => (
+              favoriteCaps.slice(0, 4).map((product) => (
                 <motion.div key={product.id} {...fadeUp}>
-                  {/* ProductCard will render here when data is added */}
+                  <ProductCard product={product} />
                 </motion.div>
               ))
             ) : (
@@ -220,9 +221,9 @@ const Home = () => {
             transition={{ duration: 0.6, staggerChildren: 0.08 }}
           >
             {bestSellers.length > 0 ? (
-              bestSellers.map((product) => (
+              bestSellers.slice(0, 4).map((product) => (
                 <motion.div key={product.id} {...fadeUp}>
-                  {/* ProductCard will render here when data is added */}
+                  <ProductCard product={product} />
                 </motion.div>
               ))
             ) : (

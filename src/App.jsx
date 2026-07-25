@@ -6,10 +6,11 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainLayout from './Layouts/MainLayout';
+import { CartProvider } from './Context/CartContext';
+import { WishlistProvider } from './Context/WishlistContext';
 
 // Lazy-load pages (they only load when you visit them)
 const Home = lazy(() => import('./Pages/Home'));
-const Collections = lazy(() => import('./Pages/Collections'));
 const ProductCollection = lazy(() => import('./Pages/ProductCollection'));
 const ProductDetails = lazy(() => import('./Pages/ProductDetails'));
 const Lookbook = lazy(() => import('./Pages/Lookbook'));
@@ -33,26 +34,30 @@ const PageLoader = () => (
 function App() {
   return (
     <Router>
-      <Suspense fallback={<PageLoader />}>
-        <Routes>
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/collections" element={<Collections />} />
-            <Route path="/collections/:category" element={<ProductCollection />} />
-            <Route path="/product/:id" element={<ProductDetails />} />
-            <Route path="/lookbook" element={<Lookbook />} />
-            <Route path="/favorites" element={<Favorites />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </Suspense>
+      <CartProvider>
+        <WishlistProvider>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route element={<MainLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/collections" element={<ProductCollection />} />
+                <Route path="/collections/:category" element={<ProductCollection />} />
+                <Route path="/product/:id" element={<ProductDetails />} />
+                <Route path="/lookbook" element={<Lookbook />} />
+                <Route path="/favorites" element={<Favorites />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/account" element={<Account />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="*" element={<NotFound />} />
+              </Route>
+            </Routes>
+          </Suspense>
+        </WishlistProvider>
+      </CartProvider>
     </Router>
   );
 }
