@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
-import { useParams, useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiSearch, FiChevronRight } from 'react-icons/fi';
 import FilterChip from '../Components/FilterChip/FilterChip';
@@ -12,7 +12,6 @@ const PRODUCTS_PER_PAGE = 16;
 const FILTERS = ['All', 'Best Sellers', 'New Arrivals', 'Polo Ralph Lauren', 'NY', 'Nike', 'Harvard', 'New Balance', 'CAPIST'];
 
 const ProductCollection = () => {
-  const { category } = useParams();
   const [searchParams] = useSearchParams();
   const [activeFilter, setActiveFilter] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
